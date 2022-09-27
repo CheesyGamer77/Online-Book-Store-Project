@@ -1,11 +1,10 @@
-
 <!DOCTYPE HTML>
+<html>
 <head>
-<title>Admin Login</title>
+	<title>Admin Login</title>
 </head>
-
 <body>
-<table align="center" style="border:2px solid blue;">
+	<table align="center" style="border:2px solid blue;">
 		<form action="admin_tasks.php" method="post" id="adminlogin_screen">
 		<tr>
 			<td align="right">
@@ -34,7 +33,4 @@
 		</tr>
 	</table>
 </body>
-
-
-
 </html>

@@ -1,4 +1,4 @@
-
+<!DOCTYPE HTML>
 <!-- Figure 2: Search Screen by Alexander -->
 <html>
 <head>

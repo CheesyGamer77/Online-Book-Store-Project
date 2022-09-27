@@ -1,16 +1,15 @@
-
 <!-- screen 4: Book Reviews by Prithviraj Narahari, php coding: Alexander Martens-->
 <!DOCTYPE html>
 <html>
 <head>
-<title>Book Reviews - 3-B.com</title>
-<style>
-.field_set
-{
-	border-style: inset;
-	border-width:4px;
-}
-</style>
+	<title>Book Reviews - 3-B.com</title>
+	<style>
+	.field_set
+	{
+		border-style: inset;
+		border-width:4px;
+	}
+	</style>
 </head>
 <body>
 	<table align="center" style="border:1px solid blue;">
@@ -39,7 +38,5 @@
 			</td>
 		</tr>
 	</table>
-
 </body>
-
 </html>

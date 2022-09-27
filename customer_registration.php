@@ -1,6 +1,8 @@
+<!DOCTYPE HTML>
+<html>
 <script>alert('Please enter all values')</script><!-- UI: Prithviraj Narahari, php code: Alexander Martens -->
 <head>
-<title> CUSTOMER REGISTRATION </title>
+	<title> CUSTOMER REGISTRATION </title>
 </head>
 <body>
 	<table align="center" style="border:2px solid blue;">
@@ -115,4 +117,4 @@
 		</tr>
 	</table>
 </body>
-</HTML>
+</html>

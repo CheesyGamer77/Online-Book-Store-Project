@@ -1,5 +1,5 @@
-
 <!DOCTYPE HTML>
+<html>
 <head>
 	<title>Shopping Cart</title>
 	<script>
@@ -51,3 +51,4 @@
 		</tr>
 	</table>
 </body>
+</html>

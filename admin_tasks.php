@@ -1,5 +1,5 @@
-
 <!DOCTYPE HTML>
+<html>
 <head>
 	<title>ADMIN TASKS</title>
 </head>
@@ -45,6 +45,4 @@
 		</tr>
 	</table>
 </body>
-
-
 </html>

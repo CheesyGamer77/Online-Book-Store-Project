@@ -1,4 +1,4 @@
-
+<!DOCTYPE HTML>
 <!-- Figure 3: Search Result Screen by Prithviraj Narahari, php coding: Alexander Martens -->
 <html>
 <head>

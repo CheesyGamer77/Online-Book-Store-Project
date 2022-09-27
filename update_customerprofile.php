@@ -1,7 +1,8 @@
+<!DOCTYPE HTML>
+<html>
 <script>alert('Please enter all values')</script><!DOCTYPE HTML>
 <head>
-<title>UPDATE CUSTOMER PROFILE</title>
-
+	<title>UPDATE CUSTOMER PROFILE</title>
 </head>
 <body>
 	<form id="update_profile" action="" method="post">

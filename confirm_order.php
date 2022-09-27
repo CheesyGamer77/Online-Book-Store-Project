@@ -1,5 +1,5 @@
-
 <!DOCTYPE HTML>
+<html>
 <head>
 	<title>CONFIRM ORDER</title>
 	<header align="center">Confirm Order</header> 
@@ -76,4 +76,4 @@
 	</tr>
 	</table>
 </body>
-</HTML>
+</html>

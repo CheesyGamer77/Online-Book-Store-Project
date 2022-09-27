@@ -1,5 +1,5 @@
-
 <!DOCTYPE HTML>
+<html>
 <head>
 	<title>Proof purchase</title>
 	<header align="center">Proof purchase</header> 
@@ -69,4 +69,4 @@
 	</tr>
 	</table>
 </body>
-</HTML>
+</html>

@@ -1,5 +1,9 @@
-<!-- Figure 1: Welcome Screen by Alexander -->
-<title>Welcome to Best Book Buy Online Bookstore!</title>
+<!DOCTYPE HTML>
+<html>
+<head>
+	<!-- Figure 1: Welcome Screen by Alexander -->
+	<title>Welcome to Best Book Buy Online Bookstore!</title>
+</head>
 <body>
 	<table align="center" style="border:1px solid blue;">
 	<tr><td><h2>Best Book Buy (3-B.com)</h2></td></tr>
@@ -13,4 +17,4 @@
 	</form></td></tr>
 	</table>
 </body>
-</html
+</html>

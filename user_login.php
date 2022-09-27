@@ -1,7 +1,6 @@
-
 <!DOCTYPE HTML>
 <head>
-<title>User Login</title>
+	<title>User Login</title>
 </head>
 <body>
 	<table align="center" style="border:2px solid blue;">
@@ -33,5 +32,4 @@
 		</tr>
 	</table>
 </body>
-
 </html>

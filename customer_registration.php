@@ -15,19 +15,12 @@
 
 		// FIXME: No validation for PIN
 
-		// TODO: Temp debug code
-		echo $username;
-		echo $pin;
-		echo $retypePin;
-		echo $firstName;
-		echo $lastName;
-		echo $address;
-		echo $city;
-		echo $state;
-		echo $zip;
-		echo $ccType;
-		echo $ccNumber;
-		echo $ccExpiration;
+		// FIXME: Don't ever do this with passwords. Ever.
+		$conn = mysqli_connect('localhost', 'frontend', '8sDAe2+2$pX2-+s', 'BBB');
+		
+		if (!$conn) {
+			echo "<script>alert('Failed to connect to database: " . mysqli_connect_error() . "');</script>";
+		}
 	}
 ?>
 

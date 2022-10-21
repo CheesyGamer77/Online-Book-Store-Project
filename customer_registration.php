@@ -26,10 +26,7 @@
 		// insert credit card data
 		// FIXME: Violates GDPR regulations on encrypting PII
 		$sql = "INSERT INTO CreditCard(cardNumber, type, expiration) VALUES ('$ccNumber', '$ccType', '$ccExpiration');";
-		if (mysqli_query($conn, $sql)) {
-			echo "Inserted credit card data";
-		}
-		else {
+		if (!mysqli_query($conn, $sql)) {
 			echo "Failed to insert credit card data " . mysqli_error($conn);
 			die();
 		}
@@ -37,10 +34,7 @@
 		// insert the rest of the user data
 		// FIXME: Violates GDPR regulations on encrypting PII
 		$sql = "INSERT INTO Customer(userName, pin, fName, lName, address, city, state, zip, creditCardNumber) VALUES ('$username', '$pin', '$firstName', '$lastName', '$address', '$city', '$state', '$zip', '$ccNumber');";
-		if (mysqli_query($conn, $sql)) {
-			echo "Inserted user data";
-		}
-		else {
+		if (!mysqli_query($conn, $sql)) {
 			echo "Failed to insert user data " . mysqli_error($conn);
 			die();
 		}

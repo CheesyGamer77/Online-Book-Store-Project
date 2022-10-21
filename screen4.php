@@ -6,7 +6,7 @@
 
 		$title = $_GET['title'];
 
-		echo "<script>console.log('Title: " . $title;
+		debug("Title: " . $title);
 
 		$conn = db_connect();
 

@@ -1,5 +1,7 @@
 <?php
 	if (isset($_GET)) {
+		$title = $_GET['title'];
+
 		require_once 'lib/common.php';
 
 		$conn = db_connect();
@@ -40,7 +42,7 @@
 				<h5>Reviews For:</h5>
 			</td>
 			<td align="left">
-				<h5><?php echo $book['title']?></h5>
+				<h5><?php echo $title?></h5>
 			</td>
 		</tr>
 			

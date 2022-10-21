@@ -10,6 +10,7 @@
 
 		$conn = db_connect();
 
+		debug("Connected to DB");
 		$isbn = mysqli_real_escape_string($conn, $_GET('isbn'));
 		debug("ISBN: " . $isbn);
 

@@ -17,9 +17,8 @@
 		}
 
 		$book = mysqli_fetch_assoc($res);
-		mysqli_free_result($res);
-
 		debug("Author: " . $book['author']);
+		mysqli_free_result($res);
 
 		// fetch reviews ordered by time submitted (newer reviews first)
 		$sql = "SELECT content FROM Review WHERE isbn = '$isbn' ORDER BY submittedAt DESC;";

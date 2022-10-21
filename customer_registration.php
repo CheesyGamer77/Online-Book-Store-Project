@@ -1,25 +1,48 @@
 <?php
 	if (isset($_POST['register_submit'])) {
-		$username = $_POST['username'];
-		$pin = $_POST['pin'];
-		$retypePin = $_POST['retype_pin'];
-		$firstName = $_POST['firstname'];
-		$lastName = $_POST['firstname'];
-		$address = $_POST['address'];
-		$city = $_POST['city'];
-		$state = $_POST['state'];
-		$zip = $_POST['zip'];
-		$ccType = $_POST['credit_card'];
-		$ccNumber = $_POST['card_number'];
-		$ccExpiration = $_POST['expiration'];
-
-		// FIXME: No validation for PIN
-
 		// FIXME: Don't ever do this with passwords. Ever.
 		$conn = mysqli_connect('localhost', 'frontend', '8sDAe2+2$pX2-+s', 'BBB');
-		
 		if (!$conn) {
 			echo "<script>alert('Failed to connect to database: " . mysqli_connect_error() . "');</script>";
+			die();
+		}
+
+		// use escape strings for inserting data
+		$username = mysqli_real_escape_string($conn, $_POST['username']);
+		$pin = mysqli_real_escape_string($conn, $_POST['pin']);
+		$retypePin = mysqli_real_escape_string($conn, $_POST['retype_pin']);
+		$firstName = mysqli_real_escape_string($conn, $_POST['firstname']);
+		$lastName = mysqli_real_escape_string($conn, $_POST['firstname']);
+		$address = mysqli_real_escape_string($conn, $_POST['address']);
+		$city = mysqli_real_escape_string($conn, $_POST['city']);
+		$state = mysqli_real_escape_string($conn, $_POST['state']);
+		$zip = mysqli_real_escape_string($conn, $_POST['zip']);
+		$ccType = mysqli_real_escape_string($conn, $_POST['credit_card']);
+		$ccNumber = mysqli_real_escape_string($conn, $_POST['card_number']);
+		$ccExpiration = mysqli_real_escape_string($conn, $_POST['expiration']);
+
+		// FIXME: No validation for PIN		
+
+		// insert credit card data
+		// FIXME: Violates GDPR regulations on encrypting PII
+		$sql = "INSERT INTO CreditCard(cardNumber, type, expiration) VALUES ('$ccNumber', '$ccType', '$ccExpiration');";
+		if (mysqli_query($conn, $sql)) {
+			echo "Inserted credit card data";
+		}
+		else {
+			echo "Failed to insert credit card data " . mysqli_error($conn);
+			die();
+		}
+
+		// insert the rest of the user data
+		// FIXME: Violates GDPR regulations on encrypting PII
+		$sql = "INSERT INTO Customer(userName, pin, fName, lName, address, city, state, zip, creditCardNumber) VALUES ('$username', '$pin', '$firstName', '$lastName', '$address', '$city', '$state', '$zip', '$ccNumber');";
+		if (mysqli_query($conn, $sql)) {
+			echo "Inserted user data";
+		}
+		else {
+			echo "Failed to insert user data " . mysqli_error($conn);
+			die();
 		}
 	}
 ?>

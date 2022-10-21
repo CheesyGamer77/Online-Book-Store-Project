@@ -1,3 +1,36 @@
+<?php
+	if (isset($_POST['register_submit'])) {
+		$username = $_POST['username'];
+		$pin = $_POST['pin'];
+		$retypePin = $_POST['retype_pin'];
+		$firstName = $_POST['firstname'];
+		$lastName = $_POST['firstname'];
+		$address = $_POST['address'];
+		$city = $_POST['city'];
+		$state = $_POST['state'];
+		$zip = $_POST['zip'];
+		$ccType = $_POST['credit_card'];
+		$ccNumber = $_POST['card_number'];
+		$ccExpiration = $_POST['expiration'];
+
+		// FIXME: No validation for PIN
+
+		// TODO: Temp debug code
+		echo $username;
+		echo $pin;
+		echo $retypePin;
+		echo $firstName;
+		echo $lastName;
+		echo $address;
+		echo $city;
+		echo $state;
+		echo $zip;
+		echo $ccType;
+		echo $ccNumber;
+		echo $ccExpiration;
+	}
+?>
+
 <!DOCTYPE HTML>
 <html>
 <script>alert('Please enter all values')</script><!-- UI: Prithviraj Narahari, php code: Alexander Martens -->

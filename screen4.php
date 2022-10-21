@@ -11,8 +11,8 @@
 		$isbn = mysqli_real_escape_string($conn, $_GET('isbn'));
 
 		// fetch book author
-		$sql = "SELECT author FROM Book WHERE isbn = $isbn";
-		$res = db_query($conn, $sql);
+		$sql = "SELECT author FROM Book WHERE isbn = '$isbn'";
+		$res = mysqli_query($conn, $sql);
 		$book = mysqli_fetch_assoc($res);
 		mysqli_free_result($res);
 
@@ -20,7 +20,7 @@
 
 		// fetch reviews ordered by time submitted (newer reviews first)
 		$sql = "SELECT content FROM Review WHERE isbn = '$isbn' ORDER BY submittedAt DESC";
-		$res = db_query($conn, $sql);
+		$res = mysqli_query($conn, $sql);
 		$reviewTexts = mysqli_fetch_all($res);
 		mysqli_free_result($res);
 

@@ -18,7 +18,9 @@
 		$ccNumber = mysqli_real_escape_string($conn, $_POST['card_number']);
 		$ccExpiration = mysqli_real_escape_string($conn, $_POST['expiration']);
 
-		// FIXME: No validation for PIN		
+		if ($pin != $retypePin) {
+			die("Failed to verify PIN");
+		}
 
 		// insert credit card data
 		// FIXME: Violates GDPR regulations on encrypting PII

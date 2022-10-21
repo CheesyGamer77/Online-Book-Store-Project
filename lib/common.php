@@ -30,6 +30,6 @@
     }
 
     function debug($message) {
-        echo "<script>console.log($message);</script>";
+        echo "<script>console.log('$message');</script>";
     }
 ?>

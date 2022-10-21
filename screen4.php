@@ -1,10 +1,12 @@
 <?php
 	if (isset($_GET)) {
+		require_once 'lib/common.php';
+
+		debug("Got here");
+
 		$title = $_GET['title'];
 
-		echo "Title: " . $title;
-
-		require_once 'lib/common.php';
+		echo "<script>console.log('Title: " . $title;
 
 		$conn = db_connect();
 

@@ -2,6 +2,8 @@
 	if (isset($_GET)) {
 		$title = $_GET['title'];
 
+		echo "Title: " . $title;
+
 		require_once 'lib/common.php';
 
 		$conn = db_connect();
@@ -12,12 +14,18 @@
 		$sql = "SELECT author FROM Book WHERE isbn = $isbn";
 		$res = db_query($conn, $sql);
 		$book = mysqli_fetch_assoc($res);
+		mysqli_free_result($res);
+
+		echo "Author: " . $book['author'];
 
 		// fetch reviews ordered by time submitted (newer reviews first)
 		$sql = "SELECT content FROM Review WHERE isbn = '$isbn' ORDER BY submittedAt DESC";
 		$res = db_query($conn, $sql);
 		$reviewTexts = mysqli_fetch_all($res);
+		mysqli_free_result($res);
 
+		echo "Fetched reviews";
+		
 		db_close($conn);
 	}
 ?>

@@ -4,7 +4,7 @@
      * @return conn MySQL Connection object.
      */
     function db_connect() {
-        $conn = @mysqli_connect('localhost', 'frontend', '8sDAe2+2$pX2-+s', 'BBB') or die("Failed to connect to database: " . mysqli_connect_error());
+        $conn = @mysqli_connect('localhost', 'frontend', '8sDAe2+2$pX2-+s', 'BBB') or alert("Failed to connect to database: " . mysqli_connect_error());
         return $conn;
     }
 
@@ -14,7 +14,7 @@
      * @param sql The SQL to run.
      */
     function db_query($conn, $sql) {
-        return @mysqli_query($conn, $sql) or die("Query failed: " . mysqli_error($conn));
+        return @mysqli_query($conn, $sql) or alert("Query failed: " . mysqli_error($conn));
     }
 
     /**
@@ -22,5 +22,10 @@
      */
     function db_close($connection) {
         @mysqli_close($connection);
+    }
+
+    function alert($message) {
+        echo "<script>alert($message);</script>";
+        die($message);
     }
 ?>

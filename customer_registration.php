@@ -1,11 +1,8 @@
 <?php
 	if (isset($_POST['register_submit'])) {
-		// FIXME: Don't ever do this with passwords. Ever.
-		$conn = mysqli_connect('localhost', 'frontend', '8sDAe2+2$pX2-+s', 'BBB');
-		if (!$conn) {
-			echo "<script>alert('Failed to connect to database: " . mysqli_connect_error() . "');</script>";
-			die();
-		}
+		require_once 'lib/common.php';
+
+		$conn = db_connect();
 
 		// use escape strings for inserting data
 		$username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -26,18 +23,14 @@
 		// insert credit card data
 		// FIXME: Violates GDPR regulations on encrypting PII
 		$sql = "INSERT INTO CreditCard(cardNumber, type, expiration) VALUES ('$ccNumber', '$ccType', '$ccExpiration');";
-		if (!mysqli_query($conn, $sql)) {
-			echo "Failed to insert credit card data " . mysqli_error($conn);
-			die();
-		}
+		db_query($conn, $sql);
 
 		// insert the rest of the user data
 		// FIXME: Violates GDPR regulations on encrypting PII
 		$sql = "INSERT INTO Customer(userName, pin, fName, lName, address, city, state, zip, creditCardNumber) VALUES ('$username', '$pin', '$firstName', '$lastName', '$address', '$city', '$state', '$zip', '$ccNumber');";
-		if (!mysqli_query($conn, $sql)) {
-			echo "Failed to insert user data " . mysqli_error($conn);
-			die();
-		}
+		db_query($conn, $sql);
+
+		db_close($conn);
 	}
 ?>
 

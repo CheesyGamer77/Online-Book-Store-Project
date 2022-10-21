@@ -9,17 +9,21 @@
 		$conn = db_connect();
 
 		$isbn = mysqli_real_escape_string($conn, $_GET('isbn'));
+		echo "ISBN: " . $isbn;
 
 		// fetch book author
-		$sql = "SELECT author FROM Book WHERE isbn = '$isbn'";
-		$res = mysqli_query($conn, $sql);
+		$sql = "SELECT author FROM Book WHERE isbn = '$isbn';";
+		if (!($res = mysqli_query($conn, $sql))) {
+			echo "Error: " . mysqli_error($conn);
+		}
+
 		$book = mysqli_fetch_assoc($res);
 		mysqli_free_result($res);
 
 		echo "Author: " . $book['author'];
 
 		// fetch reviews ordered by time submitted (newer reviews first)
-		$sql = "SELECT content FROM Review WHERE isbn = '$isbn' ORDER BY submittedAt DESC";
+		$sql = "SELECT content FROM Review WHERE isbn = '$isbn' ORDER BY submittedAt DESC;";
 		$res = mysqli_query($conn, $sql);
 		$reviewTexts = mysqli_fetch_all($res);
 		mysqli_free_result($res);

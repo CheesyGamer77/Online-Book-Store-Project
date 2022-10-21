@@ -11,12 +11,12 @@
 		$conn = db_connect();
 
 		$isbn = mysqli_real_escape_string($conn, $_GET('isbn'));
-		echo "ISBN: " . $isbn;
+		debug("ISBN: " . $isbn);
 
 		// fetch book author
 		$sql = "SELECT author FROM Book WHERE isbn = '$isbn';";
 		if (!($res = mysqli_query($conn, $sql))) {
-			echo "Error: " . mysqli_error($conn);
+			debug("Error: " . mysqli_error($conn));
 		}
 
 		$book = mysqli_fetch_assoc($res);

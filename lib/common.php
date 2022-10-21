@@ -14,7 +14,7 @@
      * @param sql The SQL to run.
      */
     function db_query($conn, $sql) {
-        @mysqli_query($conn, $sql) or die("Query failed: " . mysqli_error($conn));
+        return @mysqli_query($conn, $sql) or die("Query failed: " . mysqli_error($conn));
     }
 
     /**

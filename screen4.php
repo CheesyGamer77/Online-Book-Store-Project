@@ -2,16 +2,12 @@
 	if (isset($_GET)) {
 		require_once 'lib/common.php';
 
-		debug("Got here");
-
 		$title = $_GET['title'];
-
-		debug("Title: " . $title);
 
 		$conn = db_connect();
 
 		debug("Connected to DB");
-		$isbn = mysqli_real_escape_string($conn, $_GET('isbn'));
+		$isbn = mysqli_real_escape_string($conn, $_GET['isbn']);
 		debug("ISBN: " . $isbn);
 
 		// fetch book author

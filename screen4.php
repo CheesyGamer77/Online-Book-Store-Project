@@ -27,7 +27,7 @@
 		$reviewTexts = mysqli_fetch_all($res);
 		mysqli_free_result($res);
 
-		debug("Fetched reviews");
+		debug("Fetched " . count($reviewTexts) . " reviews");
 		
 		db_close($conn);
 	}
@@ -60,13 +60,9 @@
 		<tr>
 			<td colspan="2">
 			<div id="bookdetails" style="overflow:scroll;height:200px;width:300px;border:1px solid black;">
-			<table>
-				<?php
-					foreach ($reviewTexts as $review) {
-						echo "<tr><td>" . htmlspecialchars($review['content']) . "</td></tr>";
-					}
-				?>
-			</table>
+			<table><?php foreach ($reviewTexts as $review) { ?>
+				<tr><td> <?php echo htmlspecialchars($review['content']) ?></td></tr>";
+			<?php }?></table>
 			</div>
 			</td>
 		</tr>

@@ -52,7 +52,7 @@
 				<h5>Reviews For:</h5>
 			</td>
 			<td align="left">
-				<h5><?php echo $title?></h5>
+				<h5><?php echo $title . "<br>By: " . $author?></h5>
 			</td>
 		</tr>
 			
@@ -60,7 +60,12 @@
 			<td colspan="2">
 			<div id="bookdetails" style="overflow:scroll;height:200px;width:300px;border:1px solid black;">
 			<table>
-						</table>
+				<?php
+					foreach ($reviewTexts as $review) {
+						echo "<tr><td>" . htmlspecialchars($review) . "</td></tr>";
+					}
+				?>
+			</table>
 			</div>
 			</td>
 		</tr>

@@ -29,6 +29,8 @@
 
 		debug("Fetched " . count($reviewTexts) . " reviews");
 		
+		print_r($reviewTexts);
+
 		db_close($conn);
 	}
 ?>

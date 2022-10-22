@@ -6,19 +6,13 @@
 
 		$conn = db_connect();
 
-		debug("Connected to DB");
 		$isbn = mysqli_real_escape_string($conn, $_GET['isbn']);
-		debug("ISBN: " . $isbn);
 
 		// fetch book author
 		$sql = "SELECT author FROM Book WHERE isbn = '$isbn';";
-		if (!($res = mysqli_query($conn, $sql))) {
-			debug("Error: " . mysqli_error($conn));
-		}
-
+		$res = mysqli_query($conn, $sql);
 		$book = mysqli_fetch_assoc($res);
 		$author = $book['author'];
-		debug("Author: " . $book['author']);
 		mysqli_free_result($res);
 
 		// fetch reviews ordered by time submitted (newer reviews first)
@@ -26,10 +20,6 @@
 		$res = mysqli_query($conn, $sql);
 		$reviewTexts = mysqli_fetch_all($res, MYSQLI_ASSOC);
 		mysqli_free_result($res);
-
-		debug("Fetched " . count($reviewTexts) . " reviews");
-		
-		print_r($reviewTexts);
 
 		db_close($conn);
 	}
@@ -63,7 +53,7 @@
 			<td colspan="2">
 			<div id="bookdetails" style="overflow:scroll;height:200px;width:300px;border:1px solid black;">
 			<table><?php foreach ($reviewTexts as $review) { ?>
-				<tr><td> <?php echo htmlspecialchars($review['content']) ?></td></tr>";
+				<tr><td> <?php echo htmlspecialchars($review['content']) ?></td></tr>
 			<?php }?></table>
 			</div>
 			</td>

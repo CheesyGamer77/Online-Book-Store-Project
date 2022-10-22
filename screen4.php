@@ -24,7 +24,7 @@
 		// fetch reviews ordered by time submitted (newer reviews first)
 		$sql = "SELECT content FROM Review WHERE isbn = '$isbn' ORDER BY submittedAt DESC;";
 		$res = mysqli_query($conn, $sql);
-		$reviewTexts = mysqli_fetch_all($res);
+		$reviewTexts = mysqli_fetch_all($res, MYSQLI_ASSOC);
 		mysqli_free_result($res);
 
 		debug("Fetched " . count($reviewTexts) . " reviews");

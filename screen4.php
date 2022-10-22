@@ -1,31 +1,26 @@
 <?php
 	if (isset($_GET)) {
-		$title = $_GET['title'];
-
-		echo "Title: " . $title;
-
 		require_once 'lib/common.php';
+
+		$title = $_GET['title'];
 
 		$conn = db_connect();
 
-		$isbn = mysqli_real_escape_string($conn, $_GET('isbn'));
+		$isbn = mysqli_real_escape_string($conn, $_GET['isbn']);
 
 		// fetch book author
-		$sql = "SELECT author FROM Book WHERE isbn = $isbn";
-		$res = db_query($conn, $sql);
+		$sql = "SELECT author FROM Book WHERE isbn = '$isbn';";
+		$res = mysqli_query($conn, $sql);
 		$book = mysqli_fetch_assoc($res);
+		$author = $book['author'];
 		mysqli_free_result($res);
-
-		echo "Author: " . $book['author'];
 
 		// fetch reviews ordered by time submitted (newer reviews first)
-		$sql = "SELECT content FROM Review WHERE isbn = '$isbn' ORDER BY submittedAt DESC";
-		$res = db_query($conn, $sql);
-		$reviewTexts = mysqli_fetch_all($res);
+		$sql = "SELECT content FROM Review WHERE isbn = '$isbn' ORDER BY submittedAt DESC;";
+		$res = mysqli_query($conn, $sql);
+		$reviewTexts = mysqli_fetch_all($res, MYSQLI_ASSOC);
 		mysqli_free_result($res);
 
-		echo "Fetched reviews";
-		
 		db_close($conn);
 	}
 ?>
@@ -50,15 +45,16 @@
 				<h5>Reviews For:</h5>
 			</td>
 			<td align="left">
-				<h5><?php echo $title?></h5>
+				<h5><?php echo $title . "<br>By: " . $author?></h5>
 			</td>
 		</tr>
 			
 		<tr>
 			<td colspan="2">
 			<div id="bookdetails" style="overflow:scroll;height:200px;width:300px;border:1px solid black;">
-			<table>
-						</table>
+			<table><?php foreach ($reviewTexts as $review) { ?>
+				<tr><td> <?php echo htmlspecialchars($review['content']) ?></td></tr>
+			<?php }?></table>
 			</div>
 			</td>
 		</tr>

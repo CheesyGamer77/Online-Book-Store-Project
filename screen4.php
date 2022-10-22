@@ -17,6 +17,7 @@
 		}
 
 		$book = mysqli_fetch_assoc($res);
+		$author = $book['author'];
 		debug("Author: " . $book['author']);
 		mysqli_free_result($res);
 

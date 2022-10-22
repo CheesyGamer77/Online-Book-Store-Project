@@ -63,7 +63,7 @@
 			<table>
 				<?php
 					foreach ($reviewTexts as $review) {
-						echo "<tr><td>" . htmlspecialchars($review) . "</td></tr>";
+						echo "<tr><td>" . htmlspecialchars($review['content']) . "</td></tr>";
 					}
 				?>
 			</table>

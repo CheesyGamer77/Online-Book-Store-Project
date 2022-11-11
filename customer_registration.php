@@ -24,12 +24,12 @@
 
 		// insert credit card data
 		// FIXME: Violates GDPR regulations on encrypting PII
-		$sql = "INSERT INTO CreditCard(cardNumber, type, expiration) VALUES ('$ccNumber', '$ccType', '$ccExpiration');";
+		$sql = "INSERT INTO CreditCard(CardNo, CardType, ExpDate) VALUES ('$ccNumber', '$ccType', '$ccExpiration');";
 		db_query($conn, $sql);
 
 		// insert the rest of the user data
 		// FIXME: Violates GDPR regulations on encrypting PII
-		$sql = "INSERT INTO Customer(userName, pin, fName, lName, address, city, state, zip, creditCardNumber) VALUES ('$username', '$pin', '$firstName', '$lastName', '$address', '$city', '$state', '$zip', '$ccNumber');";
+		$sql = "INSERT INTO Customer(Username, PIN, FName, LName, Address, City, State, Zip, CardNo) VALUES ('$username', '$pin', '$firstName', '$lastName', '$address', '$city', '$state', '$zip', '$ccNumber');";
 		db_query($conn, $sql);
 
 		db_close($conn);

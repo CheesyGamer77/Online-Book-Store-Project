@@ -25,7 +25,11 @@
     }
 
     function alert($message) {
-        echo "<script>alert($message);</script>";
+        echo "<script>alert('$message');</script>";
         die($message);
+    }
+
+    function debug($message) {
+        echo "<script>console.log('$message');</script>";
     }
 ?>

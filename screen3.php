@@ -19,7 +19,7 @@
 	<script>
 	//redirect to reviews page
 	function review(isbn, title){
-		window.location.href="screen4.php?isbn="+ isbn + "&title=" + title;
+		window.location.href="screen4.php?isbn="+ isbn;
 	}
 	//add to cart
 	function cart(isbn, searchfor, searchon, category){
@@ -93,7 +93,7 @@
 						echo "<td rowspan='2' align='left'>" . $row['Title'].  "</br>" .$row['FName'] . " " . $row['LName']. "</br>";
 						echo "<b>Publisher:</b> " . $row['PublisherName']. "</br>";
 						echo "<b>ISBN:</b> " . $row['ISBN']. "</t> <b>Price:</b> $" . $row['Price']. "</td></tr>";
-						echo "<tr><td align='left'><button name='review' id='review' onClick='review(" . $row['ISBN'] . "," . $row['Title'] . ")'>Reviews</button></td></tr>";
+						echo "<tr><td align='left'><button name='review' id='review' onClick='review(\"" . $row['ISBN']. "\")'>Reviews</button></td></tr>";
 						echo "<tr><td colspan='2'><p>_______________________________________________</p></td></tr>";
 					} 
 

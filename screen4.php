@@ -2,19 +2,19 @@
 	if (isset($_GET)) {
 		require_once 'lib/common.php';
 
-		$title = $_GET['title'];
 		$isbn = $_GET['isbn'];
 
 		$conn = db_connect();
 
 		// fetch book author
-		$sql = "SELECT LName
+		$sql = "SELECT LName, Title
 				FROM Book
 				JOIN Author ON Book.AuthorID = Author.AuthorID
 				WHERE isbn = '$isbn';";
 		$res = mysqli_query($conn, $sql);
 		$book = mysqli_fetch_assoc($res);
 		$author = $book['LName'];
+		$title = $book["Title"];
 		mysqli_free_result($res);
 
 		// fetch reviews ordered by time submitted (newer reviews first)

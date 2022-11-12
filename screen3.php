@@ -49,8 +49,6 @@
 			<div id="bookdetails" style="overflow:scroll;height:180px;width:400px;border:1px solid black;background-color:LightBlue">
 			<table>
 				<?php
-					//joins together author and publisher with book
-
 					//initalizing the query. we will be updating this as we parse through inputs
 					$query = 
 					"SELECT Book.ISBN, Price, Genre, Title, PublisherName, FName, LName
@@ -92,9 +90,9 @@
 						echo "<tr><td align='left'>";
 						//echo "<button name='btnCart' id='btnCart' onClick='cart(" . $current_sale_id ." , 1, \"". date("F") . "\", \"". date("Y") . "\", 0, \"" . $_SESSION["user"] . "\", \"" . $row['ISBN']. "\")'>Add to Cart</button></td>";
 						echo "<td rowspan='2' align='left'>" . $row['Title'].  "</br>" .$row['FName'] . " " . $row['LName']. "</br>";
-						echo "<b>Publisher:</b> " . $row['PublisherName']. ",</br>";
+						echo "<b>Publisher:</b> " . $row['PublisherName']. "</br>";
 						echo "<b>ISBN:</b> " . $row['ISBN']. "</t> <b>Price:</b> $" . $row['Price']. "</td></tr>";
-						echo "<tr><td align='left'><button name='review' id='review' onClick='review(\"" . $row['ISBN']. "\")'>Reviews</button></td></tr>";
+						echo "<tr><td align='left'><button name='review' id='review' onClick='review(" . $row['ISBN'] . "," . $row['Title'] . ")'>Reviews</button></td></tr>";
 						echo "<tr><td colspan='2'><p>_______________________________________________</p></td></tr>";
 					} 
 

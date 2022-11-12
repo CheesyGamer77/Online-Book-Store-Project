@@ -10,19 +10,26 @@
 		//$isbn = mysqli_real_escape_string($conn, $_GET['isbn']);
 
 		// fetch book author
-		$sql = "SELECT DISTINCT FName, LName FROM Book, Author;";
+		$sql = 
+			"SELECT DISTINCT FName, LName, ReviewText
+			FROM Author
+			JOIN Book ON Author.AuthorID = Book.AuthorID
+			JOIN Review ON Book.ISBN = Review.ISBN
+			WHERE Review.ISBN = " . $isbn .";";
 		$res = mysqli_query($conn, $sql);
 		$book = mysqli_fetch_assoc($res);
-		$author = $book.FName . $book.LName;
-		mysqli_free_result($res);
-
-		// fetch reviews ordered by time submitted (newer reviews first)
-		$sql = "SELECT reviewText FROM Review WHERE isbn = '$isbn'";
-		$res = mysqli_query($conn, $sql);
 		$reviewTexts = mysqli_fetch_all($res, MYSQLI_ASSOC);
+		$author = $book['author'];
+
 		mysqli_free_result($res);
 
-		db_close($conn);
+		// // fetch reviews ordered by time submitted (newer reviews first)
+		// $sql = "SELECT ReviewText FROM Review WHERE isbn = '$isbn'";
+		// $res = mysqli_query($conn, $sql);
+		// $reviewTexts = mysqli_fetch_all($res, MYSQLI_ASSOC);
+		// mysqli_free_result($res);
+
+		// db_close($conn);
 	}
 ?>
 
@@ -54,7 +61,7 @@
 			<td colspan="2">
 			<div id="bookdetails" style="overflow:scroll;height:200px;width:300px;border:1px solid black;">
 			<table><?php foreach ($reviewTexts as $review) { ?>
-				<tr><td> <?php echo htmlspecialchars($review['reviewText']) ?></td></tr>
+				<tr><td> <?php echo htmlspecialchars($review['ReviewText']) ?></td></tr>
 			<?php }?></table>
 			</div>
 			</td>

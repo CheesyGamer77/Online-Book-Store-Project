@@ -57,7 +57,7 @@
 					FROM Book
 					JOIN Author ON Book.AuthorID = Author.AuthorID
 					JOIN PublishedBy ON Book.ISBN = PublishedBy.ISBN
-					JOIN Publisher ON Publisher.PublisherID = PublishedBy.PublisherID ";
+					JOIN Publisher ON Publisher.PublisherID = PublishedBy.PublisherID";
 					$queryAddition = " WHERE";
 
 					//if we have a criteria we wish to search on, specify that.
@@ -78,16 +78,24 @@
 						$queryAddition = $queryAddition . (" AND Genre = ".$category."");
 					}
 
-					//adding everything together
-					$query = $query . $queryAddition;
+					//adding everything together. we check to see if anything was acutally added as a specific search first.
+					if($queryAddition!=" WHERE")
+					{
+						$query = $query . $queryAddition;
+					}
 					$query = $query . ";";
 
-					echo ($query);
-
+					//querying and displaying stuff
 					$result = mysqli_query($conn, $query);	
 					while($row = mysqli_fetch_array($result))
 					{
-						print_r($row);
+						echo "<tr><td align='left'>";
+						//echo "<button name='btnCart' id='btnCart' onClick='cart(" . $current_sale_id ." , 1, \"". date("F") . "\", \"". date("Y") . "\", 0, \"" . $_SESSION["user"] . "\", \"" . $row['ISBN']. "\")'>Add to Cart</button></td>";
+						echo "<td rowspan='2' align='left'>" . $row['Title'].  "</br>" .$row['FName'] . " " . $row['LName']. "</br>";
+						echo "<b>Publisher:</b> " . $row['PublisherName']. ",</br>";
+						echo "<b>ISBN:</b> " . $row['ISBN']. "</t> <b>Price:</b> $" . $row['Price']. "</td></tr>";
+						echo "<tr><td align='left'><button name='review' id='review' onClick='review(\"" . $row['ISBN']. "\")'>Reviews</button></td></tr>";
+						echo "<tr><td colspan='2'><p>_______________________________________________</p></td></tr>";
 					} 
 
 				?>

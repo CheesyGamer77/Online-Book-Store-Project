@@ -49,15 +49,21 @@
 			<div id="bookdetails" style="overflow:scroll;height:180px;width:400px;border:1px solid black;background-color:LightBlue">
 			<table>
 				<?php
-					
+					//joins together author and publisher with book
+
 					//initalizing the query. we will be updating this as we parse through inputs
-					$query = "SELECT * FROM Book WHERE";
-					$queryAddition = "";
+					$query = 
+					"SELECT Book.ISBN, Price, Genre, Title, PublisherName, FName, LName
+					FROM Book
+					JOIN Author ON Book.AuthorID = Author.AuthorID
+					JOIN PublishedBy ON Book.ISBN = PublishedBy.ISBN
+					JOIN Publisher ON Publisher.PublisherID = PublishedBy.PublisherID ";
+					$queryAddition = " WHERE";
 
 					//if we have a criteria we wish to search on, specify that.
 					if ($searchOn == "anywhere")
 					{
-						$queryAddition = $queryAddition . (" Author LIKE '%".$keyword."%' OR Title LIKE '%".$keyword."%' OR ISBN LIKE '%".$keyword."%' OR Publisher LIKE '%".$keyword."%'");
+						$queryAddition = $queryAddition . (" FName LIKE '%".$keyword."%' OR LName LIKE '%".$keyword."%' OR Title LIKE '%".$keyword."%' OR Book.ISBN LIKE '%".$keyword."%' OR PublisherName LIKE '%".$keyword."%'");
 					}
 					else
 					{

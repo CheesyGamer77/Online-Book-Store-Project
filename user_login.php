@@ -2,14 +2,14 @@
 	if (isset($_POST['login'])) {
 		require_once 'lib/common.php';
 
-		//start the session and connect to the db
-		session_start();
 		$conn = db_connect();
 
 		//grab and set variables
 		$username = $_POST["username"];
 		$pin = $_POST["pin"];
 		$route = 'user_login.php';
+		$DBusername = "";
+		$DBpin = "";
 
 		//query for any customer with the given username
 		$sql_query = "SELECT * FROM Customer WHERE username='$username';"; 
@@ -26,6 +26,8 @@
 		//if all the inputs are valid, log the user in and send them to screen 2. otherwise stay here
 		if($DBusername == $username && $DBpin == $pin && $username != "" && $pin != "")
 		{
+			session_start();
+			$_SESSION["user"] = $_POST["username"];
 			header("Location: screen2.php");
 			exit;
 		}

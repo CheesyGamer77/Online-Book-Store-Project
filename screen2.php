@@ -1,3 +1,8 @@
+<?php
+	session_start();
+	echo $_SESSION['user'];
+?>
+
 <!DOCTYPE HTML>
 <!-- Figure 2: Search Screen by Alexander -->
 <html>

@@ -9,9 +9,9 @@
 		$searchOn = "";
 		$category = "";
 
-		$keyword = $_POST["searchfor"];
-		$searchOn = $_POST["searchon"];
-		$category = $_POST["category"];
+		$keyword = $_GET["searchfor"];
+		$searchOn = $_GET["searchon"];
+		$category = $_GET["category"];
 
 		$_SESSION["keyword"] = $keyword;
 		$_SESSION["searchOn"] = $searchOn;
@@ -30,7 +30,7 @@
 		<tr>
 			<td>Search for: </td>
 			<!-- action="screen3.php" -->
-			<form method="post" action="screen3.php">
+			<form method="get" action="screen3.php">
 				<td><input name="searchfor" id = "searchfor"/></td>
 				<td><input type="submit" name="search" value="Search" /></td>
 		</tr>

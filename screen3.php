@@ -3,11 +3,7 @@
 	$conn = db_connect();
 	session_start();
 
-	print_r($_SESSION);
-
-	// echo $_SESSION["keyword"];
-	// echo $_SESSION["searchOn"];
-	// echo $_SESSION["category"];
+	//print_r($_SESSION);
 ?>
 
 

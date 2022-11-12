@@ -1,26 +1,3 @@
-<?php
-	require_once 'lib/common.php';
-	$conn = db_connect();
-	session_start();
-
-	if (isset($_POST['search'])) {
-
-		$keyword = "";
-		$searchOn = "";
-		$category = "";
-
-		$keyword = $_GET["searchfor"];
-		$searchOn = $_GET["searchon"];
-		$category = $_GET["category"];
-
-		echo $keyword;
-		echo $searchOn;
-		echo $category;
-	}
-
-	db_close($conn);
-?>
-
 <!DOCTYPE HTML>
 <!-- Figure 2: Search Screen by Alexander -->
 <html>

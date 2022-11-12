@@ -2,6 +2,12 @@
 	require_once 'lib/common.php';
 	$conn = db_connect();
 	session_start();
+
+	print_r($_SESSION);
+
+	// echo $_SESSION["keyword"];
+	// echo $_SESSION["searchOn"];
+	// echo $_SESSION["category"];
 ?>
 
 
@@ -45,7 +51,7 @@
 				<?php
 					//initalizing the query. we will be updating this as we parse through inputs
 					$query = "SELECT * FROM Book";
-					
+
 				?>
 			</table>
 			</div>

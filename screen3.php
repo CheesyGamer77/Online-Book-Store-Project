@@ -8,6 +8,7 @@
 	$category = $_GET["category"];
 
 	//print_r($_SESSION);
+	db_close($conn);
 ?>
 
 

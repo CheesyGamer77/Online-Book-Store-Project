@@ -17,6 +17,8 @@
 		echo $searchOn;
 		echo $category;
 	}
+
+	db_close($conn);
 ?>
 
 <!DOCTYPE HTML>

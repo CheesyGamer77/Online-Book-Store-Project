@@ -3,6 +3,10 @@
 	$conn = db_connect();
 	session_start();
 
+	$keyword = $_GET["searchfor"];
+	$searchOn = $_GET["searchon"];
+	$category = $_GET["category"];
+
 	//print_r($_SESSION);
 ?>
 
@@ -45,8 +49,40 @@
 			<div id="bookdetails" style="overflow:scroll;height:180px;width:400px;border:1px solid black;background-color:LightBlue">
 			<table>
 				<?php
+					
 					//initalizing the query. we will be updating this as we parse through inputs
-					$query = "SELECT * FROM Book";
+					$query = "SELECT * FROM Book WHERE";
+					$queryAddition = "";
+
+					//if we have a criteria we wish to search on, specify that.
+					if ($searchOn == "anywhere")
+					{
+						$queryAddition = $queryAddition . (" Author LIKE '%".$keyword."%' OR Title LIKE '%".$keyword."%' OR ISBN LIKE '%".$keyword."%' OR Publisher LIKE '%".$keyword."%'");
+					}
+					else
+					{
+						$queryAddition = $queryAddition . (" ".$searchOn." LIKE '%".$keyword."%'");
+					}
+					
+					//if the user has specified a category, search only for those books.
+					//we check for searchon here again because we want the formatting to be correct with AND.
+					//TODO: make this not terrible.
+					if($category != "all" && isset($searchOn))
+					{
+						$queryAddition = $queryAddition . (" AND Genre = ".$category."");
+					}
+
+					//adding everything together
+					$query = $query . $queryAddition;
+					$query = $query . ";";
+
+					echo ($query);
+
+					$result = mysqli_query($conn, $query);	
+					while($row = mysqli_fetch_array($result))
+					{
+						print_r($row);
+					} 
 
 				?>
 			</table>

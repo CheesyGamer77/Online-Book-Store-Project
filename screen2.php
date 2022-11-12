@@ -13,9 +13,9 @@
 		$searchOn = $_GET["searchon"];
 		$category = $_GET["category"];
 
-		$_SESSION["keyword"] = $keyword;
-		$_SESSION["searchOn"] = $searchOn;
-		$_SESSION["category"] = $category;
+		echo $keyword;
+		echo $searchOn;
+		echo $category;
 	}
 ?>
 
@@ -50,21 +50,14 @@
 		<tr>
 			<td>Category: </td>
 				<td><select name="category">
-						<option value='all' selected='selected'>All Categories</option>
-							<?php
-								//grab all distinct genres in the DB
-								$genres = "SELECT DISTINCT Genre FROM Book";
-								$result = mysqli_query($conn, $genres);
-								//populate the dropdown with all genres in DB
-								if (mysqli_num_rows($result) > 0) {
-									while ($row = mysqli_fetch_assoc($result)) {
-										echo "<option value='".$row['Genre']."'>".$row['Genre']."</option>";
-									}
-								}
-							?>
+					<option value='all' selected='selected'>All Categories</option>
+					<option value='Science Fiction'>Science Fiction</option>
+					<option value='Classics'>Classics</option>
+					<option value='Historical Fiction'>Historical Fiction</option>
+					<option value='Fantasy'>Fantasy</option>
 				</form>
-	<form action="index.php" method="post">	
-				<td><input type="submit" name="exit" value="EXIT 3-B.com" /></td>
+			<form action="index.php" method="post">	
+						<td><input type="submit" name="exit" value="EXIT 3-B.com" /></td>
 			</form>
 		</tr>
 	</table>

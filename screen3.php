@@ -3,12 +3,12 @@
 	$conn = db_connect();
 	session_start();
 
-	$keyword = $_GET["searchfor"];
-	$searchOn = $_GET["searchon"];
-	$category = $_GET["category"];
-
-	//print_r($_SESSION);
-	db_close($conn);
+	$keyword = mysqli_real_escape_string($conn, $_GET["searchfor"]);
+	debug($keyword);
+	$searchOn = mysqli_real_escape_string($conn, $_GET["searchon"]);
+	debug($searchOn);
+	$category = mysqli_real_escape_string($conn, $_GET["category"]);
+	debug($category);
 ?>
 
 
@@ -32,9 +32,7 @@
 	<table align="center" style="border:1px solid blue;">
 		<tr>
 			<td align="left">
-				
-					<h6> <fieldset>Your Shopping Cart has 0 items</fieldset> </h6>
-				
+				<h6><fieldset>Your Shopping Cart has 0 items</fieldset></h6>
 			</td>
 			<td>
 				&nbsp
@@ -51,22 +49,23 @@
 			<table>
 				<?php
 					//initalizing the query. we will be updating this as we parse through inputs
-					$query = 
-					"SELECT Book.ISBN, Price, Genre, Title, PublisherName, FName, LName
+					$query = "SELECT Book.ISBN, Price, Genre, Title, PublisherName, FName, LName
 					FROM Book
-					JOIN Author ON Book.AuthorID = Author.AuthorID
-					JOIN PublishedBy ON Book.ISBN = PublishedBy.ISBN
-					JOIN Publisher ON Publisher.PublisherID = PublishedBy.PublisherID";
+					NATURAL JOIN Author
+					NATURAL JOIN PublishedBy
+					NATURAL JOIN Publisher";
 					$queryAddition = " WHERE";
 
 					//if we have a criteria we wish to search on, specify that.
-					if ($searchOn == "anywhere")
-					{
-						$queryAddition = $queryAddition . (" FName LIKE '%".$keyword."%' OR LName LIKE '%".$keyword."%' OR Title LIKE '%".$keyword."%' OR Book.ISBN LIKE '%".$keyword."%' OR PublisherName LIKE '%".$keyword."%'");
-					}
-					else
-					{
-						$queryAddition = $queryAddition . (" ".$searchOn." LIKE '%".$keyword."%'");
+					if ($keyword != "") {
+						if ($searchOn == "anywhere")
+						{
+							$queryAddition = $queryAddition . (" FName LIKE '%".$keyword."%' OR LName LIKE '%".$keyword."%' OR Title LIKE '%".$keyword."%' OR Book.ISBN LIKE '%".$keyword."%' OR PublisherName LIKE '%".$keyword."%'");
+						}
+						else
+						{
+							$queryAddition = $queryAddition . (" ".$searchOn." LIKE '%".$keyword."%'");
+						}
 					}
 					
 					//if the user has specified a category, search only for those books.
@@ -77,8 +76,8 @@
 						$queryAddition = $queryAddition . (" AND Genre = ".$category."");
 					}
 
-					//adding everything together. we check to see if anything was acutally added as a specific search first.
-					if($queryAddition!=" WHERE")
+					//adding everything together. we check to see if anything was actually added as a specific search first.
+					if($queryAddition != " WHERE")
 					{
 						$query = $query . $queryAddition;
 					}
@@ -124,3 +123,7 @@
 	</table>
 </body>
 </html>
+
+<?php
+db_close($conn);
+?>

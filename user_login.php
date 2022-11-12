@@ -1,10 +1,44 @@
+<?php
+	if (isset($_POST['login'])) {
+		require_once 'lib/common.php';
+
+		//start the session and connect to the db
+		session_start();
+		$conn = db_connect();
+
+		//grab and set variables
+		$username = $_POST["username"];
+		$pin = $_POST["pin"];
+		$route = 'user_login.php';
+
+		//query for any customer with the given username
+		$sql_query = "SELECT * FROM Customer WHERE username='$username';"; 
+		$result = $conn->query($sql_query);
+
+		//grabbing the result from the DB
+		if(mysqli_num_rows($result) > 0 ){
+			while($row = mysqli_fetch_array($result)) {
+				$DBusername = $row['Username'];
+				$DBpin = $row['PIN'];
+			}
+		}
+
+		//if all the inputs are valid, log the user in and send them to screen 2. otherwise stay here
+		if($DBusername == $username && $DBpin == $pin && $username != "" && $pin != "")
+		{
+			header("Location: screen2.php");
+			exit;
+		}
+	}
+?>
+
 <!DOCTYPE HTML>
 <head>
 	<title>User Login</title>
 </head>
 <body>
 	<table align="center" style="border:2px solid blue;">
-		<form action="screen2.php" method="post" id="login_screen">
+		<form method="post" id="login_screen">
 		<tr>
 			<td align="right">
 				Username<span style="color:red">*</span>:

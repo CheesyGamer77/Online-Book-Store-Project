@@ -9,7 +9,7 @@
 		$pin = mysqli_real_escape_string($conn, $_POST['pin']);
 		$retypePin = mysqli_real_escape_string($conn, $_POST['retype_pin']);
 		$firstName = mysqli_real_escape_string($conn, $_POST['firstname']);
-		$lastName = mysqli_real_escape_string($conn, $_POST['firstname']);
+		$lastName = mysqli_real_escape_string($conn, $_POST['lastname']);
 		$address = mysqli_real_escape_string($conn, $_POST['address']);
 		$city = mysqli_real_escape_string($conn, $_POST['city']);
 		$state = mysqli_real_escape_string($conn, $_POST['state']);

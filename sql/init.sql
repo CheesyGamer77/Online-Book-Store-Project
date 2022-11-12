@@ -15,7 +15,7 @@ INSERT INTO
 VALUES
     ("A123", 15.99, "Fiction", "The Old Man and the Sea", 1),
     ("B123", 16.99, "Fiction", "Cat's Cradle", 2),
-    ("C123", 17.99, "Fiction", " The Picture of Dorian Gray", 3);
+    ("C123", 17.99, "Fiction", "The Picture of Dorian Gray", 3);
     
 INSERT INTO
 	Review(ReviewText, ISBN)

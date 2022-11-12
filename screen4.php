@@ -2,21 +2,26 @@
 	if (isset($_GET)) {
 		require_once 'lib/common.php';
 
-		$title = $_GET['title'];
+		$isbn = $_GET['isbn'];
 
 		$conn = db_connect();
 
-		$isbn = mysqli_real_escape_string($conn, $_GET['isbn']);
-
 		// fetch book author
-		$sql = "SELECT FName, LName FROM Book, Author WHERE ISBN = '$isbn';";
+		$sql = "SELECT LName, Title
+				FROM Book
+				JOIN Author ON Book.AuthorID = Author.AuthorID
+				WHERE isbn = '$isbn';";
 		$res = mysqli_query($conn, $sql);
 		$book = mysqli_fetch_assoc($res);
-		$author = $book['FName'] . " " . $book['LName'];
+		$author = $book['LName'];
+		$title = $book["Title"];
 		mysqli_free_result($res);
 
 		// fetch reviews ordered by time submitted (newer reviews first)
-		$sql = "SELECT ReviewText FROM Review WHERE ISBN = '$isbn' ORDER BY SubmittedAt DESC;";
+		$sql = "SELECT ReviewText 
+				FROM Review
+				JOIN Book ON Review.ISBN = Book.ISBN
+		 		WHERE Book.ISBN = '$isbn';";
 		$res = mysqli_query($conn, $sql);
 		$reviewTexts = mysqli_fetch_all($res, MYSQLI_ASSOC);
 		mysqli_free_result($res);

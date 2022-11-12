@@ -3,6 +3,7 @@
 		require_once 'lib/common.php';
 
 		$conn = db_connect();
+		session_start();
 
 		//grab and set variables
 		$username = $_POST["username"];
@@ -26,7 +27,6 @@
 		//if all the inputs are valid, log the user in and send them to screen 2. otherwise stay here
 		if($DBusername == $username && $DBpin == $pin && $username != "" && $pin != "")
 		{
-			session_start();
 			$_SESSION["user"] = $_POST["username"];
 			header("Location: screen2.php");
 			exit;

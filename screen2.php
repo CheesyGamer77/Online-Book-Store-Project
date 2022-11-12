@@ -1,4 +1,6 @@
 <?php
+	require_once 'lib/common.php';
+	$conn = db_connect();
 	session_start();
 ?>
 
@@ -33,7 +35,17 @@
 			<td>Category: </td>
 				<td><select name="category">
 						<option value='all' selected='selected'>All Categories</option>
-						<option value='1'>Fantasy</option><option value='2'>Adventure</option><option value='3'>Fiction</option><option value='4'>Horror</option>				</select></td>
+						<?php
+						//grab all distinct genres in the DB
+							$genres = "SELECT DISTINCT Genre FROM Book";
+							$result = mysqli_query($conn, $genres);
+						//populate the dropdown with all genres in DB
+							if (mysqli_num_rows($result) > 0) {
+								while ($row = mysqli_fetch_assoc($result)) {
+									echo "<option value='".$row."'>".$row['Genre']."</option>";
+								}
+							}
+						?>
 				</form>
 	<form action="index.php" method="post">	
 				<td><input type="submit" name="exit" value="EXIT 3-B.com" /></td>

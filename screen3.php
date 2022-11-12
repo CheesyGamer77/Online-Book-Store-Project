@@ -42,7 +42,11 @@
 		<td style="width: 350px" colspan="3" align="center">
 			<div id="bookdetails" style="overflow:scroll;height:180px;width:400px;border:1px solid black;background-color:LightBlue">
 			<table>
-
+				<?php
+					//initalizing the query. we will be updating this as we parse through inputs
+					$query = "SELECT * FROM Book";
+					
+				?>
 			</table>
 			</div>
 			

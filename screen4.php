@@ -7,29 +7,26 @@
 
 		$conn = db_connect();
 
-		//$isbn = mysqli_real_escape_string($conn, $_GET['isbn']);
-
 		// fetch book author
-		$sql = 
-			"SELECT DISTINCT FName, LName, ReviewText
-			FROM Author
-			JOIN Book ON Author.AuthorID = Book.AuthorID
-			JOIN Review ON Book.ISBN = Review.ISBN
-			WHERE Review.ISBN = " . $isbn .";";
+		$sql = "SELECT LName
+				FROM Book
+				JOIN Author ON Book.AuthorID = Author.AuthorID
+				WHERE isbn = '$isbn';";
 		$res = mysqli_query($conn, $sql);
 		$book = mysqli_fetch_assoc($res);
-		$reviewTexts = mysqli_fetch_all($res, MYSQLI_ASSOC);
-		$author = $book['author'];
-
+		$author = $book['LName'];
 		mysqli_free_result($res);
 
-		// // fetch reviews ordered by time submitted (newer reviews first)
-		// $sql = "SELECT ReviewText FROM Review WHERE isbn = '$isbn'";
-		// $res = mysqli_query($conn, $sql);
-		// $reviewTexts = mysqli_fetch_all($res, MYSQLI_ASSOC);
-		// mysqli_free_result($res);
+		// fetch reviews ordered by time submitted (newer reviews first)
+		$sql = "SELECT ReviewText 
+				FROM Review
+				JOIN Book ON Review.ISBN = Book.ISBN
+		 		WHERE Book.ISBN = '$isbn';";
+		$res = mysqli_query($conn, $sql);
+		$reviewTexts = mysqli_fetch_all($res, MYSQLI_ASSOC);
+		mysqli_free_result($res);
 
-		// db_close($conn);
+		db_close($conn);
 	}
 ?>
 

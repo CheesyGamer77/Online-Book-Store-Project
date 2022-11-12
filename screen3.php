@@ -84,9 +84,10 @@
 					$query = $query . ";";
 
 					//querying and displaying stuff
-					$result = mysqli_query($conn, $query);	
+					$result = mysqli_query($conn, $query);
 					while($row = mysqli_fetch_array($result))
 					{
+						//these unholy buttons are what was provided. may god have mercy on our souls.	
 						echo "<tr><td align='left'>";
 						//echo "<button name='btnCart' id='btnCart' onClick='cart(" . $current_sale_id ." , 1, \"". date("F") . "\", \"". date("Y") . "\", 0, \"" . $_SESSION["user"] . "\", \"" . $row['ISBN']. "\")'>Add to Cart</button></td>";
 						echo "<td rowspan='2' align='left'>" . $row['Title'].  "</br>" .$row['FName'] . " " . $row['LName']. "</br>";

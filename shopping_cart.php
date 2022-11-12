@@ -1,12 +1,61 @@
+<?php
+	require_once 'lib/common.php';
+	session_start();
+
+	// init shopping cart
+    if(!isset($_SESSION['username']))
+    {
+		// TODO PH-4: Correct username
+        $_SESSION['username'] = "user";
+        $_SESSION['cart'] = array(array(
+			"isbn" => "A123",
+			"title" => "The Old Man and the Sea",
+			"author" => "Ernest Hemingway",
+			"publisher" => "PublisherOne",
+			"price" => 15.99,
+			"quantity" => 2
+		));
+    }
+
+	$cart = $_SESSION['cart'];
+
+	if (isset($_GET['delIsbn'])) {
+		// removing a book from cart
+		$isbn = $_GET['delIsbn'];
+		$newCart = array();
+
+		foreach($cart as $book) {
+			if($book['isbn'] != $isbn) {
+				array_push($newCart, $book);
+				continue;
+			}
+
+			$quantity = $book['quantity'];
+			debug($quantity);
+			if($quantity != 1) {
+				$book['quantity'] = $book['quantity'] - 1;
+				array_push($newCart, $book);
+			}
+		}
+
+		$cart = $newCart;
+		$_SESSION['cart'] = $cart;
+	}
+
+	if(isset($_POST['recalculate_payment'])) {
+		
+	}
+?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
 	<title>Shopping Cart</title>
 	<script>
-	//remove from cart
-	function del(isbn){
-		window.location.href="shopping_cart.php?delIsbn="+ isbn;
-	}
+		//remove from cart
+		function del(isbn) {
+			window.location.href="shopping_cart.php?delIsbn="+ isbn;
+		}
 	</script>
 </head>
 <body>
@@ -34,7 +83,29 @@
 				<div id="bookdetails" style="overflow:scroll;height:180px;width:400px;border:1px solid black;">
 					<table align="center" BORDER="2" CELLPADDING="2" CELLSPACING="2" WIDTH="100%">
 						<th width='10%'>Remove</th><th width='60%'>Book Description</th><th width='10%'>Qty</th><th width='10%'>Price</th>
-						<tr><td><button name='delete' id='delete' onClick='del("123441");return false;'>Delete Item</button></td><td>iuhdf</br><b>By</b> Avi Silberschatz</br><b>Publisher:</b> McGraw-Hill</td><td><input id='txt123441' name='txt123441' value='1' size='1' /></td><td>12.99</td></tr>					</table>
+						<?php foreach ($cart as $book) {
+							echo "<tr>";
+
+							$isbn = $book['isbn'];
+							$title = $book['title'];
+							$author = $book['author'];
+							$publisher = $book['publisher'];
+							$price = $book['price'];
+							$quantity = $book['quantity'];
+
+							// delete button
+							echo "<td><button name='delete' id='delete' onClick=\"del(" . "'$isbn'" . "); return false;\">Delete Item</button></td>";
+
+							// book details
+							echo "<td>$title</br><b>By</b> $author</br><b>Publisher:</b> $publisher</td>";
+
+							echo "<td><input id='txt ". $isbn ."' name='txt123441' value='$quantity' size='1'/></td>";
+
+							// price
+							echo "<td>$price</td>";
+							echo "</tr>";
+						} ?>
+					</table>
 				</div>
 			</td>
 		</tr>
@@ -46,8 +117,13 @@
 			<td align="center">
 				&nbsp;
 			</td>
-			<td align="center">			
-				Subtotal:  $12.99			</td>
+			<td align="center">Subtotal:  $<?php
+				$total = 0;
+				foreach($cart as $book) {
+					$total = round($total + ($book['price'] * $book['quantity']), 2);
+				}
+				echo $total;
+			?></td>
 		</tr>
 	</table>
 </body>

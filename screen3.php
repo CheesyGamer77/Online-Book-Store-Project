@@ -4,11 +4,46 @@
 	session_start();
 
 	$keyword = mysqli_real_escape_string($conn, $_GET["searchfor"]);
-	debug($keyword);
 	$searchOn = mysqli_real_escape_string($conn, $_GET["searchon"]);
-	debug($searchOn);
 	$category = mysqli_real_escape_string($conn, $_GET["category"]);
-	debug($category);
+
+	if(isset($_GET["cartisbn"])) {
+		if(!isset($_SESSION['cart'])) {
+			// default to empty cart
+			$_SESSION['cart'] = array();
+		}
+
+		// find book with said ISBN
+		$isbn = $_GET["cartisbn"];
+		$sql = "SELECT Book.ISBN, Title, FName, LName, PublisherName, Price
+				FROM Book
+				NATURAL JOIN Author
+				NATURAL JOIN PublishedBy
+				NATURAL JOIN Publisher
+				WHERE Book.ISBN = '$isbn'";
+		$res = mysqli_query($conn, $sql);
+		$book = mysqli_fetch_assoc($res);
+
+		// check if the book already exists in the cart
+		// if so, increment the quantity
+		$quantity = 1;
+		foreach($_SESSION['cart'] as $b) {
+			if($b['isbn'] == $isbn) {
+				$quantity = $b['quantity'] + 1;
+				break;
+			}
+		}
+
+		// add book data to cart
+		array_push($_SESSION['cart'], array(
+			"isbn" => $isbn,
+			"title" => $book['Title'],
+			"author" => $book['FName'] . " " . $book['LName'],
+			"publisher" => $book['PublisherName'],
+			"price" => $book['Price'],
+			"quantity" => $quantity
+		));
+	}
 ?>
 
 
@@ -89,7 +124,7 @@
 					{
 						//these unholy buttons are what was provided. may god have mercy on our souls.	
 						echo "<tr><td align='left'>";
-						//echo "<button name='btnCart' id='btnCart' onClick='cart(" . $current_sale_id ." , 1, \"". date("F") . "\", \"". date("Y") . "\", 0, \"" . $_SESSION["user"] . "\", \"" . $row['ISBN']. "\")'>Add to Cart</button></td>";
+						echo "<button name='btnCart' id='btnCart' onClick='cart(\"" . $row['ISBN'] . "\"," . "\"$keyword\"," . "\"$searchOn\"," . "\"$category\")'>Add to Cart</button></td>";
 						echo "<td rowspan='2' align='left'>" . $row['Title'].  "</br>" .$row['FName'] . " " . $row['LName']. "</br>";
 						echo "<b>Publisher:</b> " . $row['PublisherName']. "</br>";
 						echo "<b>ISBN:</b> " . $row['ISBN']. "</t> <b>Price:</b> $" . $row['Price']. "</td></tr>";

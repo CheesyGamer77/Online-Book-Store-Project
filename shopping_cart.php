@@ -7,24 +7,15 @@
     {
 		// TODO PH-4: Correct username
         $_SESSION['username'] = "user";
-        $_SESSION['cart'] = array(array(
-			"isbn" => "A123",
-			"title" => "The Old Man and the Sea",
-			"author" => "Ernest Hemingway",
-			"publisher" => "PublisherOne",
-			"price" => 15.99,
-			"quantity" => 2
-		));
+        $_SESSION['cart'] = array();
     }
-
-	$cart = $_SESSION['cart'];
 
 	if (isset($_GET['delIsbn'])) {
 		// removing a book from cart
 		$isbn = $_GET['delIsbn'];
 		$newCart = array();
 
-		foreach($cart as $book) {
+		foreach($_SESSION['cart'] as $book) {
 			if($book['isbn'] != $isbn) {
 				array_push($newCart, $book);
 				continue;
@@ -38,12 +29,7 @@
 			}
 		}
 
-		$cart = $newCart;
-		$_SESSION['cart'] = $cart;
-	}
-
-	if(isset($_POST['recalculate_payment'])) {
-		
+		$_SESSION['cart'] = $newCart;
 	}
 ?>
 
@@ -83,7 +69,7 @@
 				<div id="bookdetails" style="overflow:scroll;height:180px;width:400px;border:1px solid black;">
 					<table align="center" BORDER="2" CELLPADDING="2" CELLSPACING="2" WIDTH="100%">
 						<th width='10%'>Remove</th><th width='60%'>Book Description</th><th width='10%'>Qty</th><th width='10%'>Price</th>
-						<?php foreach ($cart as $book) {
+						<?php foreach ($_SESSION['cart'] as $book) {
 							echo "<tr>";
 
 							$isbn = $book['isbn'];
@@ -119,7 +105,7 @@
 			</td>
 			<td align="center">Subtotal:  $<?php
 				$total = 0;
-				foreach($cart as $book) {
+				foreach($_SESSION['cart'] as $book) {
 					$total = round($total + ($book['price'] * $book['quantity']), 2);
 				}
 				echo $total;

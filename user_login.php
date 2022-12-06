@@ -8,7 +8,6 @@
 		//grab and set variables
 		$username = $_POST["username"];
 		$pin = $_POST["pin"];
-		$route = 'user_login.php';
 		$DBusername = "";
 		$DBpin = "";
 

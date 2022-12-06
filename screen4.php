@@ -17,7 +17,6 @@
 		$title = $book["Title"];
 		mysqli_free_result($res);
 
-		// fetch reviews ordered by time submitted (newer reviews first)
 		$sql = "SELECT ReviewText 
 				FROM Review
 				JOIN Book ON Review.ISBN = Book.ISBN

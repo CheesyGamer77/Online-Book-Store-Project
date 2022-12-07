@@ -105,7 +105,7 @@
             </tr>
             <?php
                 foreach ($yearlySales as $row) {
-                    echo "<tr><td>" . $row["Month"] . "</td><td>" . $row["MonthlySales"] . "</td></tr>";
+                    echo "<tr><td>" . $row["Month"] . "</td><td>$" . $row["MonthlySales"] . "</td></tr>";
                 }
             ?>
         </table>

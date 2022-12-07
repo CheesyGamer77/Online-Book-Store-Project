@@ -12,7 +12,7 @@
 
         $sql = "SELECT COUNT(*) AS customerCount FROM Customer;";
         $res = mysqli_query($conn, $sql);
-        $count = mysqli_fetch_assoc($res)['customerCount'];
+        $customerCount = mysqli_fetch_assoc($res)['customerCount'];
 
         // Get total registered customers
         echo "Total registered customers: $customerCount";

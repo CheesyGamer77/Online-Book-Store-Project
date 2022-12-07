@@ -26,7 +26,7 @@
 		// if all the inputs are valid, log the user in and send them to admin tasks. otherwise stay here
 		if($DBusername == $username && $DBpin == $pin && $username != "" && $pin != "")
 		{
-			$_SESSION["admin"] = $_POST["username"];
+			$_SESSION["admin"] = $username;
 			header("Location: admin_tasks.php");
 			exit;
 		}

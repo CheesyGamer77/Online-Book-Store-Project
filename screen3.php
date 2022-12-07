@@ -44,6 +44,12 @@
 			"quantity" => $quantity
 		));
 	}
+
+	// count the items in our cart
+	$itemCount = 0;
+	foreach ($_SESSION["cart"] as $book) {
+		$itemCount += $book["quantity"];
+	}
 ?>
 
 
@@ -67,7 +73,7 @@
 	<table align="center" style="border:1px solid blue;">
 		<tr>
 			<td align="left">
-				<h6><fieldset>Your Shopping Cart has 0 items</fieldset></h6>
+				<h6><fieldset><?php echo "Your Shopping Cart has $itemCount items"; ?></fieldset></h6>
 			</td>
 			<td>
 				&nbsp

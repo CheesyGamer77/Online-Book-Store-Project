@@ -25,24 +25,30 @@
 		$book = mysqli_fetch_assoc($res);
 
 		// check if the book already exists in the cart
-		// if so, increment the quantity
+		// if so, just increment and update the quantity
 		$quantity = 1;
+		$found = false;
+		$index = 0;
 		foreach($_SESSION['cart'] as $b) {
 			if($b['isbn'] == $isbn) {
-				$quantity = $b['quantity'] + 1;
+				$b['quantity'] += 1;
+				$_SESSION['cart'][$index] = $b;
 				break;
 			}
+			$index += 1;
 		}
 
-		// add book data to cart
-		array_push($_SESSION['cart'], array(
-			"isbn" => $isbn,
-			"title" => $book['Title'],
-			"author" => $book['FName'] . " " . $book['LName'],
-			"publisher" => $book['PublisherName'],
-			"price" => $book['Price'],
-			"quantity" => $quantity
-		));
+		// add book data to cart if it wasn't already there
+		if(!$found) {
+			array_push($_SESSION['cart'], array(
+				"isbn" => $isbn,
+				"title" => $book['Title'],
+				"author" => $book['FName'] . " " . $book['LName'],
+				"publisher" => $book['PublisherName'],
+				"price" => $book['Price'],
+				"quantity" => $quantity
+			));
+		}
 	}
 
 	// count the items in our cart

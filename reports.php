@@ -4,6 +4,11 @@
     $conn = db_connect();
     session_start();
 
+    // ensure there's an actual admin logged in before proceeding
+    if (!isset($_SESSION["admin"])) {
+        header("Location: index.php");
+    }
+
     // Get total registered customers
     $sql = "SELECT COUNT(*) AS customerCount FROM Customer;";
     $res = mysqli_query($conn, $sql);

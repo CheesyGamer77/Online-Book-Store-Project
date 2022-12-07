@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>CONFIRM ORDER</title>
-	<header align="center">Confirm Order</header> 
 </head>
 <body>
 	<table align="center" style="border:2px solid blue;">

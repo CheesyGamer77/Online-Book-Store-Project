@@ -61,6 +61,20 @@
         }
         echo "Average Sales Per Month: \$$average";
 
+        // Get all titles and number of reviews for each
+        $sql = "SELECT Title, COUNT(*) AS ReviewCount
+            FROM Book
+            NATURAL JOIN Review
+            GROUP BY ISBN;";
+        $res = mysqli_query($conn, $sql);
+
+        echo "<table><tr><th>Title</th><th>Total Reviews</th></tr>";
+        while ($row = mysqli_fetch_array($res)) {
+            $monthlySales = $row["MonthlySales"];
+            echo "<tr><td>" . $row["Title"] . "</td><td>" . $row["ReviewCount"] . "</td></tr>";
+        }
+        echo "</table>";
+        mysqli_free_result($res);
         db_close($conn);
     ?></body>
 </html>

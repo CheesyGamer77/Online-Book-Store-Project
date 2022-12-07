@@ -10,9 +10,16 @@
 			<td>Shipping Address:</td>
 		</tr>
 		
+		<!-- My guess is that this is for the customer name :shrug: -->
 		<td colspan="2">test test</td>
+
+		<!-- Credit Card Deets -->
+		<!-- For some odd reason this is placed right after the start of the shipping address display :shrug: -->
 		<td rowspan="3" colspan="2">
+			<!-- You can choose to use the credit card already stored -->
 			<input type="radio" name="cardgroup" value="profile_card" checked>Use Credit card on file<br />MASTER - 1234567812345678 - 12/2015<br />
+			
+			<!-- Or use a new one instead -->
 			<input type="radio" name="cardgroup" value="new_card">New Credit Card<br />
 			<select id="credit_card" name="credit_card">
 				<option selected disabled>select a card type</option>
@@ -26,9 +33,10 @@
 			<input type="text" id="card_expiration" name="card_expiration" placeholder="mm/yyyy">
 		</td>
 		
-		<tr><td colspan="2">test</td></tr>
-		<tr><td colspan="2">test</td></tr>
-		<tr><td colspan="2">Tennessee, 12345</td></tr>
+		<!-- Here's the rest of the address stuff -->
+		<tr><td colspan="2">test</td></tr> <!-- Street -->
+		<tr><td colspan="2">test</td></tr> <!-- City -->
+		<tr><td colspan="2">Tennessee, 12345</td></tr> <!-- State, ZIP -->
 	
 		<tr>
 			<td colspan="3" align="center">
@@ -37,6 +45,8 @@
 						<th>Book Description</th>
 						<th>Qty</th>
 						<th>Price</th>
+
+						<!-- Each book gets it's own row, similar to the below -->
 						<tr>
 							<td>
 								iuhdf</br><b>By</b> Avi Silberschatz</br><b>Publisher:</b> McGraw-Hill
@@ -57,6 +67,7 @@
 			</td>
 
 			<td align="right">
+				<!-- Totals! (Subtotal, Shipping Fee, Total) -->
 				<div id="bookdetails" style="overflow:scroll;height:180px;width:260px;border:1px solid black;">
 					SubTotal:$12.99</br>Shipping_Handling:$2</br>_______</br>Total:$14.99
 				</div>
@@ -68,12 +79,16 @@
 				<input type="submit" id="buyit" name="btnbuyit" value="BUY IT!">
 			</td>
 			
-			</form>
+			</form> <!-- No idea why the form is closed *right here* :shrug: -->
+
+			<!-- Redirect to update customer profile-->
 			<td align="right">
 				<form id="update" action="update_customerprofile.php" method="post">
 					<input type="submit" id="update_customerprofile" name="update_customerprofile" value="Update Customer Profile">
 				</form>
 			</td>
+
+			<!-- Redirect to home page -->
 			<td align="left">
 				<form id="cancel" action="index.php" method="post">
 					<input type="submit" id="cancel" name="cancel" value="Cancel">

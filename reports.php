@@ -18,7 +18,7 @@
         echo "Total registered customers: $customerCount";
 
         // Get total books in each category
-        $sql = "SELECT Genre, COUNT(*) AS total FROM Book;";
+        $sql = "SELECT Genre, COUNT(*) AS total FROM Book GROUP BY Genre;";
         $res = mysqli_query($conn, $sql);
         $totals = mysqli_fetch_assoc($res);
         mysqli_free_result($res);

@@ -5,6 +5,7 @@
 </head>
 <body>
 	<table align="center" style="border:2px solid blue;">
+		<!---
 		<tr>
 			<form action="manage_bookstorecatalog.php" method="post" id="catalog">
 			<td align="center">
@@ -19,6 +20,7 @@
 			</td>
 			</form>
 		</tr>
+		--->
 		<tr>
 			<form action="reports.php" method="post" id="reports">
 			<td align="center">
@@ -26,6 +28,7 @@
 			</td>
 			</form>
 		</tr>
+		<!---
 		<tr>
 			<form action="update_adminprofile.php" method="post" id="update">
 			<td align="center">
@@ -33,6 +36,7 @@
 			</td>
 			</form>
 		</tr>
+		--->
 		<tr>
 		<td>&nbsp</td>
 		</tr>

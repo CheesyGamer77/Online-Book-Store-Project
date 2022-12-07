@@ -29,10 +29,8 @@
             echo "<tr><td>" . $row["Genre"] . "</td><td>" . $row["total"] . "</td></tr>";
         }
         echo "</table>";
-
         mysqli_free_result($res);
-		db_close($conn);
-
+		
         // Get average monthly sales for the year, ordered by month
         $sql = "SELECT Month, SUM(PurchaseTotal) AS MonthlySales
             FROM (
@@ -56,11 +54,13 @@
             $total += $monthlySales;
         }
         echo "</table>";
+        mysqli_free_result($res);
 
         if ($entries > 0) {
             $average = round($total / $entries, 2);
         }
         echo "Average Sales Per Month: \$$average";
 
+        db_close($conn);
     ?></body>
 </html>

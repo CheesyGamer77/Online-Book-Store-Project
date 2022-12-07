@@ -31,6 +31,7 @@
 		$index = 0;
 		foreach($_SESSION['cart'] as $b) {
 			if($b['isbn'] == $isbn) {
+				$found = true;
 				$b['quantity'] += 1;
 				$_SESSION['cart'][$index] = $b;
 				break;

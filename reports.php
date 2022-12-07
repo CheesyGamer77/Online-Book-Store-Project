@@ -70,7 +70,6 @@
 
         echo "<table><tr><th>Title</th><th>Total Reviews</th></tr>";
         while ($row = mysqli_fetch_array($res)) {
-            $monthlySales = $row["MonthlySales"];
             echo "<tr><td>" . $row["Title"] . "</td><td>" . $row["ReviewCount"] . "</td></tr>";
         }
         echo "</table>";

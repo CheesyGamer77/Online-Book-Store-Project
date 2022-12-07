@@ -20,16 +20,14 @@
         // Get total books in each category
         $sql = "SELECT Genre, COUNT(*) AS total FROM Book GROUP BY Genre;";
         $res = mysqli_query($conn, $sql);
-        $totals = mysqli_fetch_assoc($res);
-        mysqli_free_result($res);
 
         echo "<table><tr><th>Genre</th><th>Total</th></tr>";
-        foreach ($totals as $key => $value) {
-            echo "<tr><td>$key</td><td>$value</td></tr>";
+        while ($row = mysqli_fetch_array($res)) {
+            echo "<tr><td>" . $row["Genre"] . "</td><td>" . $row["total"] . "</td></tr>";
         }
         echo "</table>";
         
-
+        mysqli_free_result($res);
 		db_close($conn);
     ?></body>
 </html>

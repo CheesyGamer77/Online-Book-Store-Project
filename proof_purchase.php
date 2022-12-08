@@ -1,10 +1,10 @@
 <?php
 	session_start();
 
-	if(!isset($_POST["buyit"]) || !isset($_SESSION["username"]) || !isset($_SESSION["cart"])) {
+	if(!isset($_POST["btnbuyit"]) || !isset($_SESSION["username"]) || !isset($_SESSION["cart"])) {
 		//header("Location: user_login.php");
 
-		if(!isset($_POST["buyit"])) {
+		if(!isset($_POST["btnbuyit"])) {
 			echo "buyit not set";
 		}
 

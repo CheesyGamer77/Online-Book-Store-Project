@@ -9,8 +9,7 @@
 
 	if(isset($_GET["cartisbn"])) {
 		if(!isset($_SESSION['cart'])) {
-			// default to empty cart
-			$_SESSION['cart'] = array();
+			header("Location: user_login.php");
 		}
 
 		// find book with said ISBN

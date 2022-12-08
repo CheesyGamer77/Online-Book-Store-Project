@@ -25,24 +25,37 @@
 		$book = mysqli_fetch_assoc($res);
 
 		// check if the book already exists in the cart
-		// if so, increment the quantity
+		// if so, just increment and update the quantity
 		$quantity = 1;
+		$found = false;
+		$index = 0;
 		foreach($_SESSION['cart'] as $b) {
 			if($b['isbn'] == $isbn) {
-				$quantity = $b['quantity'] + 1;
+				$found = true;
+				$b['quantity'] += 1;
+				$_SESSION['cart'][$index] = $b;
 				break;
 			}
+			$index += 1;
 		}
 
-		// add book data to cart
-		array_push($_SESSION['cart'], array(
-			"isbn" => $isbn,
-			"title" => $book['Title'],
-			"author" => $book['FName'] . " " . $book['LName'],
-			"publisher" => $book['PublisherName'],
-			"price" => $book['Price'],
-			"quantity" => $quantity
-		));
+		// add book data to cart if it wasn't already there
+		if(!$found) {
+			array_push($_SESSION['cart'], array(
+				"isbn" => $isbn,
+				"title" => $book['Title'],
+				"author" => $book['FName'] . " " . $book['LName'],
+				"publisher" => $book['PublisherName'],
+				"price" => $book['Price'],
+				"quantity" => $quantity
+			));
+		}
+	}
+
+	// count the items in our cart
+	$itemCount = 0;
+	foreach ($_SESSION["cart"] as $book) {
+		$itemCount += $book["quantity"];
 	}
 ?>
 
@@ -67,7 +80,7 @@
 	<table align="center" style="border:1px solid blue;">
 		<tr>
 			<td align="left">
-				<h6><fieldset>Your Shopping Cart has 0 items</fieldset></h6>
+				<h6><fieldset><?php echo "Your Shopping Cart has $itemCount items"; ?></fieldset></h6>
 			</td>
 			<td>
 				&nbsp

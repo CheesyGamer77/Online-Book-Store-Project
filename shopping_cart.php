@@ -96,8 +96,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="center">				
+			<td align="center">
+					<!-- This button is pointless as we update the payment when a book is deleted anyways
 					<input type="submit" name="recalculate_payment" id="recalculate_payment" value="Recalculate Payment">
+					-->
 				</form>
 			</td>
 			<td align="center">

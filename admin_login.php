@@ -10,12 +10,12 @@
 		$pin = mysqli_real_escape_string($conn, $_POST["pin"]);
 
 		// query for any customer with the given username
-		$sql = "SELECT * FROM Admin WHERE Username='$username' AND PIN='$pin;"; 
+		$sql = "SELECT * FROM Admin WHERE Username='$username' AND PIN='$pin';"; 
 		$result = $conn->query($sql);
 
 		// grabbing the result from the DB
 		if(mysqli_num_rows($result) > 0 ){
-			$_SESSION["admin"] = $_POST["username"];
+			$_SESSION["admin"] = $username;
 			header("Location: admin_tasks.php");
 			exit;
 		}

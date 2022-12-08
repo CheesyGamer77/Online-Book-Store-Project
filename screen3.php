@@ -54,8 +54,10 @@
 
 	// count the items in our cart
 	$itemCount = 0;
-	foreach ($_SESSION["cart"] as $book) {
-		$itemCount += $book["quantity"];
+	if(isset($_SESSION["cart"])) {
+		foreach ($_SESSION["cart"] as $book) {
+			$itemCount += $book["quantity"];
+		}
 	}
 ?>
 

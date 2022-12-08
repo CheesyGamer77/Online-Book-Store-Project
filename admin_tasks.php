@@ -1,13 +1,25 @@
 <?php
 	session_start();
-	
-	// ensure there's an actual admin logged in before proceeding
-    if (!isset($_SESSION["admin"])) {
-        header("Location: index.php");
-		exit;
-    }
-?>
 
+	if (isset($_POST['login'])) {
+		require_once 'lib/common.php';
+
+		$conn = db_connect();
+
+		//grab and set variables
+		$username = mysqli_real_escape_string($conn, $_POST["adminname"]);
+		$pin = mysqli_real_escape_string($conn, $_POST["pin"]);
+
+		// query for any customer with the given username
+		$sql = "SELECT * FROM Admin WHERE Username='$username' AND PIN='$pin';"; 
+		$result = $conn->query($sql);
+
+		// grabbing the result from the DB
+		if(mysqli_num_rows($result) > 0 ){
+			$_SESSION["admin"] = $username;
+		}
+	}
+?>
 <!DOCTYPE HTML>
 <html>
 <head>

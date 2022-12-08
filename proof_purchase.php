@@ -2,7 +2,7 @@
 	session_start();
 
 	if(!isset($_POST["buyit"]) || !isset($_SESSION["username"]) || !isset($_SESSION["cart"])) {
-		header("Location: user_login.php");
+		//header("Location: user_login.php");
 		exit;
 	}
 

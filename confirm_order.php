@@ -14,7 +14,7 @@
 
 	$sql = "SELECT * FROM Customer
 		NATURAL JOIN (
-			SELECT CardNo, CardType, MONTH(ExpDate) AS ExpMonth, YEAR(ExpDate) as ExpYear)
+			SELECT CardNo, CardType, MONTH(ExpDate) AS ExpMonth, YEAR(ExpDate) as ExpYear
 			FROM CreditCard
 		)CardData
 		WHERE Username='$username'";

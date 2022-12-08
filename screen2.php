@@ -35,9 +35,8 @@
 					<option value='Historical Fiction'>Historical Fiction</option>
 					<option value='Fantasy'>Fantasy</option>
 				</form>
-			<form action="index.php" method="post">	
-						<td><input type="submit" name="exit" value="EXIT 3-B.com" /></td>
-			</form>
+
+			<button onclick="location.href = 'index.php';">EXIT 3-B.com</button>
 		</tr>
 	</table>
 </body>

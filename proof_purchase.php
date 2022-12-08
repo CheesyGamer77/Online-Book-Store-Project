@@ -3,6 +3,19 @@
 
 	if(!isset($_POST["buyit"]) || !isset($_SESSION["username"]) || !isset($_SESSION["cart"])) {
 		//header("Location: user_login.php");
+
+		if(!isset($_POST["buyit"])) {
+			echo "buyit not set";
+		}
+
+		if(!isset($_SESSION["username"])) {
+			echo "username not set";
+		}
+
+		if(!isset($_SESSION["cart"])) {
+			echo "cart not set";
+		}
+
 		exit;
 	}
 

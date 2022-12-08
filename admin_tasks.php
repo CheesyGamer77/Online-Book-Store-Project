@@ -14,13 +14,8 @@
 		$result = $conn->query($sql);
 
 		// grabbing the result from the DB
-		echo "Getting result";
 		if(mysqli_num_rows($result) > 0 ){
 			$_SESSION["admin"] = $username;
-			echo "Admin Username: $username";
-			echo "Admin Variable: " . $_SESSION['admin'];
-			//header("Location: admin_tasks.php");
-			exit;
 		}
 	}
 ?>

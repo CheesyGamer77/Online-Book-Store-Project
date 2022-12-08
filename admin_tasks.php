@@ -1,9 +1,9 @@
 <?php
+	session_start();
 	if (isset($_POST['login'])) {
 		require_once 'lib/common.php';
 
 		$conn = db_connect();
-		session_start();
 
 		//grab and set variables
 		$username = mysqli_real_escape_string($conn, $_POST["adminname"]);

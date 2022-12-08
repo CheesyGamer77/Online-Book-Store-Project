@@ -18,12 +18,11 @@
 
 		exit;
 	}
-
-	$username = $_SESSION["username"];
-
 	require_once 'lib/common.php';
 
 	$conn = db_connect();
+
+	$username = mysqli_real_escape_string($conn, $_SESSION["username"]);
 
 	// insert our initial purchase data and get our receipt id
 	// 
@@ -45,8 +44,8 @@
 		LIMIT 1;";
 	
 	$res = mysqli_query($conn, $sql);
-	
 	$data = mysqli_fetch_assoc($res);
+
 	$receiptId = $data["ReceiptID"];
 	$date = $data["Date"];
 	$time = $data["Time"];

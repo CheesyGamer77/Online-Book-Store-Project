@@ -1,32 +1,24 @@
 <?php
+	session_start();
+
 	if (isset($_POST['login'])) {
 		require_once 'lib/common.php';
 
 		$conn = db_connect();
-		session_start();
 
 		// grab and set variables
-		$username = $_POST["username"];
-		$pin = $_POST["pin"];
-		$DBusername = "";
-		$DBpin = "";
+		$username = mysqli_real_escape_string($conn, $_POST["username"]);
+		$pin = mysqli_real_escape_string($conn, $_POST["pin"]);
 
 		// query for any customer with the given username
-		$sql_query = "SELECT * FROM Customer WHERE Username='$username';"; 
+		$sql_query = "SELECT * FROM Customer WHERE Username='$username' AND PIN='$pin';"; 
 		$result = $conn->query($sql_query);
+
 
 		// grabbing the result from the DB
 		if(mysqli_num_rows($result) > 0 ){
-			while($row = mysqli_fetch_array($result)) {
-				$DBusername = $row['Username'];
-				$DBpin = $row['PIN'];
-			}
-		}
-
-		// if all the inputs are valid, log the user in and send them to screen 2. otherwise stay here
-		if($DBusername == $username && $DBpin == $pin && $username != "" && $pin != "")
-		{
-			$_SESSION["user"] = $_POST["username"];
+			$_SESSION["username"] = $_POST["username"];
+			$_SESSION['cart'] = array();
 			header("Location: screen2.php");
 			exit;
 		}

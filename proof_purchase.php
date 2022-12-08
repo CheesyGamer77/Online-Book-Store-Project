@@ -55,7 +55,7 @@
 	$cardDate = $data["ExpDate"];
 	$address = $data["Address"];
 	$city = $data["City"];
-	$state = $date["State"];
+	$state = $data["State"];
 	$zip = $data["Zip"];
 	mysqli_free_result($res);
 	

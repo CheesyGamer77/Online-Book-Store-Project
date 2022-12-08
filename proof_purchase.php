@@ -129,9 +129,6 @@
 		</tr>
 		
 		<tr>
-			<td align="right">
-				<input type="submit" id="buyit" name="btnbuyit" value="Print" disabled>
-			</td>
 		
 		</form>
 		

@@ -24,6 +24,12 @@
 	mysqli_free_result($res);
 
 	db_close($conn);
+
+	// compute subtotal
+	$subtotal = 0;
+	foreach ($_SESSION["cart"] as $book) {
+		$subtotal += $book["price"] * $book["quantity"];
+	}
 ?>
 
 <!DOCTYPE HTML>

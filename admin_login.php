@@ -32,7 +32,7 @@
 </head>
 <body>
 	<table align="center" style="border:2px solid blue;">
-		<form action="admin_tasks.php" method="post" id="adminlogin_screen">
+		<form action="admin_login.php" method="post" id="adminlogin_screen">
 		<tr>
 			<td align="right">
 				Adminname<span style="color:red">*</span>:

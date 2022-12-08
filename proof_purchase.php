@@ -36,7 +36,7 @@
 	db_query($conn, $sql);
 
 	// now get the receipt id from what we literally just inserted
-	$sql = "SELECT ReceiptId, DATE_FORMAT(PurchasedAt, '%Y-%m-%d') AS Date, DATE_FORMAT(PurchasedAt, '%T') AS Time, FName, LName, Address, City, State, Zip, CardNo, CardType, DATE_FORMAT(ExpDate, '%m/%Y') ExpDate
+	$sql = "SELECT ReceiptID, DATE_FORMAT(PurchasedAt, '%Y-%m-%d') AS Date, DATE_FORMAT(PurchasedAt, '%T') AS Time, FName, LName, Address, City, State, Zip, CardNo, CardType, DATE_FORMAT(ExpDate, '%m/%Y') ExpDate
 		FROM PurchaseOf
 		NATURAL JOIN Customer
 		NATURAL JOIN CreditCard

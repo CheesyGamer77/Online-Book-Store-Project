@@ -117,7 +117,7 @@
 								echo "<td>$" . $book["price"] . "</td>";
 								echo "</tr>";
 
-								$total += $book["price"] * $book["quantity"];
+								$subtotal += $book["price"] * $book["quantity"];
 							}
 							
 							$_SESSION["cart"] = array();

@@ -44,7 +44,7 @@
 		ORDER BY PurchasedAt DESC
 		LIMIT 1;";
 	
-	$res = db_query($conn, $sql);
+	$res = $conn->query($sql);
 	
 	$data = mysqli_fetch_assoc($res);
 	$receiptId = $data["ReceiptID"];

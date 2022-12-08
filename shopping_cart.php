@@ -3,11 +3,9 @@
 	session_start();
 
 	// init shopping cart
-    if(!isset($_SESSION['username']))
-    {
-		// TODO PH-4: Correct username
-        $_SESSION['username'] = "user";
-        $_SESSION['cart'] = array();
+    if(!isset($_SESSION['username'])) {
+		header("Location: user_login.php");
+		exit;
     }
 
 	if (isset($_GET['delIsbn'])) {

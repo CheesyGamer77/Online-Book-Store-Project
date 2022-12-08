@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>Proof purchase</title>
-	<header align="center">Proof purchase</header> 
 </head>
 <body>
 	<table align="center" style="border:2px solid blue;">

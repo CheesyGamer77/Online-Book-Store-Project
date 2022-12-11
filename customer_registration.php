@@ -7,7 +7,7 @@
 		//cancel the insertion if any inputs are missing
 		if(!$username||!$pin||!$retypePin||!$firstName||!$lastName||!$address||!$city||!$state||!$zip||!$ccType||!$ccNumber||!$ccExpiration)
 		{
-			alert("You're missing inputs! Please try again.");
+			header("Location: customer_registration.php");
 			exit;
 		}
 
@@ -42,14 +42,14 @@
 		if(db_query($conn, $sql)) {
 			header("Location: index.php");
 			exit;
-
-		db_close($conn);
 		}
+		db_close($conn);
 	}
 ?>
 
 <!DOCTYPE HTML>
-<html><!-- UI: Prithviraj Narahari, php code: Alexander Martens -->
+<html>
+<script>alert('Please enter all values')</script><!-- UI: Prithviraj Narahari, php code: Alexander Martens -->
 <head>
 	<title> CUSTOMER REGISTRATION </title>
 </head>

@@ -1,7 +1,30 @@
 <?php
-	require_once 'lib/common.php';
-	session_start();
-	
+	if (isset($_POST['register_submit'])) {
+		require_once 'lib/common.php';
+		session_start();
+
+		//if an user that isn't logged in has somehow gotten here, send them away
+		if(!isset($_SESSION['username'])) {
+			header("Location: user_login.php");
+			exit;
+		}
+
+		$conn = db_connect();
+
+		// use escape strings for inserting data
+		$username = mysqli_real_escape_string($conn, $_POST['username']);
+		$pin = mysqli_real_escape_string($conn, $_POST['pin']);
+		$retypePin = mysqli_real_escape_string($conn, $_POST['retype_pin']);
+		$firstName = mysqli_real_escape_string($conn, $_POST['firstname']);
+		$lastName = mysqli_real_escape_string($conn, $_POST['lastname']);
+		$address = mysqli_real_escape_string($conn, $_POST['address']);
+		$city = mysqli_real_escape_string($conn, $_POST['city']);
+		$state = mysqli_real_escape_string($conn, $_POST['state']);
+		$zip = mysqli_real_escape_string($conn, $_POST['zip']);
+		$ccType = mysqli_real_escape_string($conn, $_POST['credit_card']);
+		$ccNumber = mysqli_real_escape_string($conn, $_POST['card_number']);
+		$ccExpiration = mysqli_real_escape_string($conn, $_POST['expiration']);
+	}
 
 ?>
 

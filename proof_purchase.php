@@ -42,7 +42,7 @@
 		WHERE Username='$username'
 		ORDER BY PurchasedAt DESC
 		LIMIT 1;";
-	
+
 	$res = mysqli_query($conn, $sql);
 	$data = mysqli_fetch_assoc($res);
 
@@ -65,8 +65,8 @@
 			$cardType = $_POST["credit_card"];
 			$cardNumber = $_POST["card_number"];
 			$cardDate = $_POST["card_expiration"];
-			$sql = 
-			"UPDATE Creditcard
+			$sql =
+			"UPDATE CreditCard
 			 SET CardNo = '$cardNumber',
 			 CardType = '$cardType',
 			 ExpDate = '$cardDate'
@@ -75,7 +75,7 @@
 		}
 
 	mysqli_free_result($res);
-	
+
 	// now insert the rest of the books into the purchase
 	foreach ($_SESSION["cart"] as $book) {
 		$isbn = $book["isbn"];

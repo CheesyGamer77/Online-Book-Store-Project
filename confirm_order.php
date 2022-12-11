@@ -9,7 +9,7 @@
 	$username = $_SESSION["username"];
 
 	require_once 'lib/common.php';
-	
+
 	$conn = db_connect();
 
 	$sql = "SELECT * FROM Customer
@@ -31,8 +31,8 @@
 			$newccType = $_POST["credit_card"];
 			$newccNum = $_POST["card_number"];
 			$newccDate = $_POST["card_expiration"];
-			$sql = 
-			"UPDATE Creditcard
+			$sql =
+			"UPDATE CreditCard
 			 SET CardNo = '$newccNum',
 			 CardType = '$newccType',
 			 ExpDate = '$newccDate'

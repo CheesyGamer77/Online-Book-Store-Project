@@ -4,13 +4,6 @@
 
 		$conn = db_connect();
 
-		//cancel the insertion if any inputs are missing
-		if(!$username||!$pin||!$retypePin||!$firstName||!$lastName||!$address||!$city||!$state||!$zip||!$ccType||!$ccNumber||!$ccExpiration)
-		{
-			header("Location: customer_registration.php");
-			exit;
-		}
-
 		// use escape strings for inserting data
 		$username = mysqli_real_escape_string($conn, $_POST['username']);
 		$pin = mysqli_real_escape_string($conn, $_POST['pin']);
@@ -24,6 +17,14 @@
 		$ccType = mysqli_real_escape_string($conn, $_POST['credit_card']);
 		$ccNumber = mysqli_real_escape_string($conn, $_POST['card_number']);
 		$ccExpiration = mysqli_real_escape_string($conn, $_POST['expiration']);
+
+		//cancel the insertion if any inputs are missing
+		if(!$username||!$pin||!$retypePin||!$firstName||!$lastName||!$address||!$city||!$state||!$zip||!$ccType||!$ccNumber||!$ccExpiration)
+		{
+			header("Location: customer_registration.php");
+			exit;
+		}
+
 
 		if ($pin != $retypePin) {
 			die("Failed to verify PIN");
@@ -198,7 +199,7 @@
 				Expiration Date<span style="color:red">*</span>:
 			</td>
 			<td colspan="2" align="left">
-				<input type="text" id="expiration" name="expiration" placeholder="MM/YY">
+				<input type="text" id="expiration" name="expiration" placeholder="YYYY-MM-DD">
 			</td>
 		</tr>
 		<tr>

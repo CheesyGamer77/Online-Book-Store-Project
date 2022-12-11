@@ -122,7 +122,7 @@
 				Address<span style="color:red"></span>:
 			</td>
 			<td colspan="3">
-				<input type="text" id="address" name="address" value = <?php echo $customer["Address"]?>>
+				<input type="text" id="address" name="address" value = "<?php echo $customer["Address"]?>">
 			</td>
 		</tr>
 		<tr>
@@ -198,7 +198,7 @@
 				Zip<span style="color:red"></span>:
 			</td>
 			<td>
-				<input type="text" id="zip" name="zip" value = <?php echo $customer["Zip"]?>>
+				<input type="text" id="zip" name="zip" value = "<?php echo $customer["Zip"]?>">
 			</td>
 		</tr>
 		<tr>
@@ -214,7 +214,7 @@
 				</select>
 			</td>
 			<td align="left" colspan="2">
-				<input type="text" id="card_number" name="card_number" value = <?php echo $customer["CardNo"]?>>
+				<input type="text" id="card_number" name="card_number" value = "<?php echo $customer["CardNo"]?>">
 			</td>
 		</tr>
 		<tr>
@@ -222,7 +222,7 @@
 				Expiration Date<span style="color:red"></span>:
 			</td>
 			<td colspan="2" align="left">
-				<input type="text" id="expiration_date" name="expiration_date" value = <?php echo $customer["ExpDate"]?>>
+				<input type="text" id="expiration_date" name="expiration_date" value = "<?php echo $customer["ExpDate"]?>">
 			</td>
 		</tr>
 		<tr>

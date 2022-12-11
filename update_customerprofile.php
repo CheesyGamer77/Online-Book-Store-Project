@@ -19,6 +19,7 @@
 	WHERE Username='$username'";
 	$res = $conn->query($sql);
 	$customer = mysqli_fetch_assoc($res);
+	$oldccNumber = $customer["CardNo"];
 	mysqli_free_result($res);
 
 	if (isset($_POST['update_submit'])) {
@@ -39,9 +40,19 @@
 			die("Failed to verify PIN");
 		}
 
-		//update the customer first
+		//update card 
 		$sql = "
-		UPDATE Customer
+		UPDATE creditcard
+		SET
+		CardNo = '$ccNumber',
+		CardType = '$ccType',
+		ExpDate = '$ccExpiration'
+		WHERE CardNo = '$oldccNumber'";
+		db_query($conn, $sql);
+
+		//update customer
+		$sql = "
+		UPDATE customer
 		SET 
 		PIN = '$pin',
 		FName = '$firstName',
@@ -49,20 +60,10 @@
 		Address = '$address',
 		City = '$city',
 		State = '$state',
-		Zip = '$zip',
-		CardNo = '$ccNumber'
+		Zip = '$zip'
 		WHERE Username='$username'"; 
 		db_query($conn, $sql);
 
-		//then update the card
-		$sql = "
-		UPDATE CreditCard
-		SET
-		CardNo = '$ccNumber',
-		CardType = '$ccType',
-		ExpDate = '$ccExpiration'
-		WHERE CardNo = '$ccNumber'";
-		db_query($conn, $sql);
 	}
 
 
@@ -91,7 +92,7 @@
 				PIN<span style="color:red"></span>:
 			</td>
 			<td>
-				<input type="text" id="new_pin" name="new_pin" value = <?php echo $customer["PIN"]?>>
+				<input type="text" id="new_pin" name="new_pin">
 			</td>
 			<td align="right">
 				Re-type PIN<span style="color:red"></span>:

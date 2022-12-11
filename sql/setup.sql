@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS Customer (
     CardNo VARCHAR(16) NOT NULL,
 
     PRIMARY KEY (Username),
-    FOREIGN KEY (CardNo) REFERENCES CreditCard(CardNo)
+    FOREIGN KEY (CardNo) REFERENCES CreditCard(CardNo) ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS PurchaseOf (

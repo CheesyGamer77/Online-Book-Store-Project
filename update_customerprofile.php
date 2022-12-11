@@ -82,7 +82,7 @@
 	<table align="center" style="border:2px solid blue;">
 		<tr>
 			<td align="right">
-				Username: <?php echo($username) ?>
+				Username: <?php echo htmlspecialchars($username) ?>
 			</td>
 			<td colspan="3" align="center">
 							</td>
@@ -106,7 +106,7 @@
 				First Name<span style="color:red"></span>:
 			</td>
 			<td colspan="3">
-				<input type="text" id="firstname" name="firstname" value = <?php echo $customer["FName"]?>>
+				<input type="text" id="firstname" name="firstname" value = <?php echo htmlspecialchars($customer["FName"])?>>
 			</td>
 		</tr>
 		<tr>
@@ -114,7 +114,7 @@
 				Last Name<span style="color:red"></span>:
 			</td>
 			<td colspan="3">
-				<input type="text" id="lastname" name="lastname" value = <?php echo $customer["LName"]?>>
+				<input type="text" id="lastname" name="lastname" value = <?php echo htmlspecialchars($customer["LName"])?>>
 			</td>
 		</tr>
 		<tr>
@@ -122,7 +122,7 @@
 				Address<span style="color:red"></span>:
 			</td>
 			<td colspan="3">
-				<input type="text" id="address" name="address" value = "<?php echo $customer["Address"]?>">
+				<input type="text" id="address" name="address" value = "<?php echo htmlspecialchars($customer["Address"])?>">
 			</td>
 		</tr>
 		<tr>
@@ -130,7 +130,7 @@
 				City<span style="color:red"></span>:
 			</td>
 			<td colspan="3">
-				<input type="text" id="city" name="city" value = <?php echo $customer["City"]?>>
+				<input type="text" id="city" name="city" value = <?php echo htmlspecialchars($customer["City"])?>>
 			</td>
 		</tr>
 		<tr>
@@ -139,7 +139,7 @@
 			</td>
 			<td>
 				<select id="state" name="state">
-				<option selected><?php echo $customer["State"]?></option>
+				<option selected><?php echo htmlspecialchars($customer["State"])?></option>
 					<option value="AL">Alabama</option>
 					<option value="AK">Alaska</option>
 					<option value="AZ">Arizona</option>
@@ -198,7 +198,7 @@
 				Zip<span style="color:red"></span>:
 			</td>
 			<td>
-				<input type="text" id="zip" name="zip" value = "<?php echo $customer["Zip"]?>">
+				<input type="text" id="zip" name="zip" value = "<?php echo htmlspecialchars($customer["Zip"])?>">
 			</td>
 		</tr>
 		<tr>
@@ -207,14 +207,14 @@
 			</td>
 			<td>
 				<select id="credit_card" name="credit_card">
-				<option selected><?php echo $customer["CardType"]?></option>
+				<option selected><?php echo htmlspecialchars($customer["CardType"])?></option>
 				<option>VISA</option>
 				<option>MASTER</option>
 				<option>DISCOVER</option>
 				</select>
 			</td>
 			<td align="left" colspan="2">
-				<input type="text" id="card_number" name="card_number" value = "<?php echo $customer["CardNo"]?>">
+				<input type="text" id="card_number" name="card_number" value = "<?php echo htmlspecialchars($customer["CardNo"])?>">
 			</td>
 		</tr>
 		<tr>
@@ -222,7 +222,7 @@
 				Expiration Date<span style="color:red"></span>:
 			</td>
 			<td colspan="2" align="left">
-				<input type="text" id="expiration_date" name="expiration_date" value = "<?php echo $customer["ExpDate"]?>">
+				<input type="text" id="expiration_date" name="expiration_date" value = "<?php echo htmlspecialchars($customer["ExpDate"])?>">
 			</td>
 		</tr>
 		<tr>

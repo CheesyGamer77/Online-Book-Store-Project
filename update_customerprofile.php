@@ -22,53 +22,50 @@
 	$oldccNumber = $customer["CardNo"];
 	mysqli_free_result($res);
 
-	if (isset($_POST['update_submit'])) {
-		// use escape strings for inserting data
-		$pin = mysqli_real_escape_string($conn, $_POST['new_pin']);
-		$retypePin = mysqli_real_escape_string($conn, $_POST['retypenew_pin']);
-		$firstName = mysqli_real_escape_string($conn, $_POST['firstname']);
-		$lastName = mysqli_real_escape_string($conn, $_POST['lastname']);
-		$address = mysqli_real_escape_string($conn, $_POST['address']);
-		$city = mysqli_real_escape_string($conn, $_POST['city']);
-		$state = mysqli_real_escape_string($conn, $_POST['state']);
-		$zip = mysqli_real_escape_string($conn, $_POST['zip']);
-		$ccType = mysqli_real_escape_string($conn, $_POST['credit_card']);
-		$ccNumber = mysqli_real_escape_string($conn, $_POST['card_number']);
-		$ccExpiration = mysqli_real_escape_string($conn, $_POST['expiration_date']);
+	// if (isset($_POST['update_submit'])) {
+	// 	// use escape strings for inserting data
+	// 	$pin = mysqli_real_escape_string($conn, $_POST['new_pin']);
+	// 	$retypePin = mysqli_real_escape_string($conn, $_POST['retypenew_pin']);
+	// 	$firstName = mysqli_real_escape_string($conn, $_POST['firstname']);
+	// 	$lastName = mysqli_real_escape_string($conn, $_POST['lastname']);
+	// 	$address = mysqli_real_escape_string($conn, $_POST['address']);
+	// 	$city = mysqli_real_escape_string($conn, $_POST['city']);
+	// 	$state = mysqli_real_escape_string($conn, $_POST['state']);
+	// 	$zip = mysqli_real_escape_string($conn, $_POST['zip']);
+	// 	$ccType = mysqli_real_escape_string($conn, $_POST['credit_card']);
+	// 	$ccNumber = mysqli_real_escape_string($conn, $_POST['card_number']);
+	// 	$ccExpiration = mysqli_real_escape_string($conn, $_POST['expiration_date']);
 
-		if ($pin != $retypePin) {
-			die("Failed to verify PIN");
-		}
+	// 	if ($pin != $retypePin) {
+	// 		die("Failed to verify PIN");
+	// 	}
 
-		//update card 
-		$sql = "
-		UPDATE creditcard
-		SET
-		CardNo = '$ccNumber',
-		CardType = '$ccType',
-		ExpDate = '$ccExpiration'
-		WHERE CardNo = '$oldccNumber'";
-		db_query($conn, $sql);
+	// 	//update card 
+	// 	$sql = "
+	// 	UPDATE creditcard
+	// 	SET
+	// 	CardNo = '$ccNumber',
+	// 	CardType = '$ccType',
+	// 	ExpDate = '$ccExpiration'
+	// 	WHERE CardNo = '$oldccNumber'";
+	// 	db_query($conn, $sql);
 
-		//update customer
-		$sql = "
-		UPDATE customer
-		SET 
-		PIN = '$pin',
-		FName = '$firstName',
-		LName = '$lastName',
-		Address = '$address',
-		City = '$city',
-		State = '$state',
-		Zip = '$zip'
-		WHERE Username='$username'"; 
-		db_query($conn, $sql);
+	// 	//update customer
+	// 	$sql = "
+	// 	UPDATE customer
+	// 	SET 
+	// 	PIN = '$pin',
+	// 	FName = '$firstName',
+	// 	LName = '$lastName',
+	// 	Address = '$address',
+	// 	City = '$city',
+	// 	State = '$state',
+	// 	Zip = '$zip'
+	// 	WHERE Username='$username'"; 
+	// 	db_query($conn, $sql);
 
-	}
-
-
+	// }
 	db_close($conn);
-
 ?>
 
 <!DOCTYPE HTML>
@@ -82,7 +79,7 @@
 	<table align="center" style="border:2px solid blue;">
 		<tr>
 			<td align="right">
-				Username: <?php echo htmlspecialchars($username) ?>
+				Username: <?php echo($username) ?>
 			</td>
 			<td colspan="3" align="center">
 							</td>
@@ -106,7 +103,7 @@
 				First Name<span style="color:red"></span>:
 			</td>
 			<td colspan="3">
-				<input type="text" id="firstname" name="firstname" value = "<?php echo htmlspecialchars($customer["FName"])?>">
+				<input type="text" id="firstname" name="firstname" value = "<?php echo $customer["FName"]?>">
 			</td>
 		</tr>
 		<tr>
@@ -114,7 +111,7 @@
 				Last Name<span style="color:red"></span>:
 			</td>
 			<td colspan="3">
-				<input type="text" id="lastname" name="lastname" value = "<?php echo htmlspecialchars($customer["LName"])?>">
+				<input type="text" id="lastname" name="lastname" value = "<?php echo $customer["LName"]?>">
 			</td>
 		</tr>
 		<tr>
@@ -122,7 +119,7 @@
 				Address<span style="color:red"></span>:
 			</td>
 			<td colspan="3">
-				<input type="text" id="address" name="address" value = "<?php echo htmlspecialchars($customer["Address"])?>">
+				<input type="text" id="address" name="address" value = "<?php echo $customer["Address"]?>">
 			</td>
 		</tr>
 		<tr>
@@ -130,7 +127,7 @@
 				City<span style="color:red"></span>:
 			</td>
 			<td colspan="3">
-				<input type="text" id="city" name="city" value = "<?php echo htmlspecialchars($customer["City"])?>">
+				<input type="text" id="city" name="city" value = "<?php echo $customer["City"]?>">
 			</td>
 		</tr>
 		<tr>
@@ -139,7 +136,7 @@
 			</td>
 			<td>
 				<select id="state" name="state">
-				<option selected><?php echo htmlspecialchars($customer["State"])?></option>
+				<option selected><?php echo $customer["State"]?></option>
 					<option value="AL">Alabama</option>
 					<option value="AK">Alaska</option>
 					<option value="AZ">Arizona</option>
@@ -198,7 +195,7 @@
 				Zip<span style="color:red"></span>:
 			</td>
 			<td>
-				<input type="text" id="zip" name="zip" value = "<?php echo htmlspecialchars($customer["Zip"])?>">
+				<input type="text" id="zip" name="zip" value = "<?php echo $customer["Zip"]?>">
 			</td>
 		</tr>
 		<tr>
@@ -207,14 +204,14 @@
 			</td>
 			<td>
 				<select id="credit_card" name="credit_card">
-				<option selected><?php echo htmlspecialchars($customer["CardType"])?></option>
+				<option selected><?php echo $customer["CardType"]?></option>
 				<option>VISA</option>
 				<option>MASTER</option>
 				<option>DISCOVER</option>
 				</select>
 			</td>
 			<td align="left" colspan="2">
-				<input type="text" id="card_number" name="card_number" value = "<?php echo htmlspecialchars($customer["CardNo"])?>">
+				<input type="text" id="card_number" name="card_number" value = "<?php echo $customer["CardNo"]?>">
 			</td>
 		</tr>
 		<tr>
@@ -222,7 +219,7 @@
 				Expiration Date<span style="color:red"></span>:
 			</td>
 			<td colspan="2" align="left">
-				<input type="text" id="expiration_date" name="expiration_date" value = "<?php echo htmlspecialchars($customer["ExpDate"])?>">
+				<input type="text" id="expiration_date" name="expiration_date" value = "<?php echo $customer["ExpDate"]?>">
 			</td>
 		</tr>
 		<tr>

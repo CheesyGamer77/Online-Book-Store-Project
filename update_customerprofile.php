@@ -42,7 +42,7 @@
 
 	 	//update card 
 	 	$sql = "
-		UPDATE creditcard
+		UPDATE CreditCard
 	 	SET
 	 	CardNo = '$ccNumber',
 	 	CardType = '$ccType',
@@ -52,7 +52,7 @@
 
 	 	//update customer
 	 	$sql = "
-		UPDATE customer
+		UPDATE Customer
 	 	SET 
 	 	PIN = '$pin',
 	 	FName = '$firstName',

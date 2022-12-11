@@ -1,3 +1,12 @@
+<?php
+	require_once 'lib/common.php';
+	session_start();
+	
+
+?>
+
+
+
 <!DOCTYPE HTML>
 <html>
 <script>alert('Please enter all values')</script><!DOCTYPE HTML>

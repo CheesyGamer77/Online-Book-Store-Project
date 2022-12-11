@@ -64,7 +64,6 @@
 		Zip = '$zip'
 		WHERE Username='$username'"; 
 		db_query($conn, $sql);
-		header("Location: confirm_order.php");
 	}
 
 	if(isset($_POST["btnbuyit"]))

@@ -22,10 +22,9 @@
 	mysqli_free_result($res);
 
 	if (isset($_POST['update_submit'])) {
-
 		// use escape strings for inserting data
-		$pin = mysqli_real_escape_string($conn, $_POST['pin']);
-		$retypePin = mysqli_real_escape_string($conn, $_POST['retype_pin']);
+		$pin = mysqli_real_escape_string($conn, $_POST['new_pin']);
+		$retypePin = mysqli_real_escape_string($conn, $_POST['retypenew_pin']);
 		$firstName = mysqli_real_escape_string($conn, $_POST['firstname']);
 		$lastName = mysqli_real_escape_string($conn, $_POST['lastname']);
 		$address = mysqli_real_escape_string($conn, $_POST['address']);
@@ -34,9 +33,38 @@
 		$zip = mysqli_real_escape_string($conn, $_POST['zip']);
 		$ccType = mysqli_real_escape_string($conn, $_POST['credit_card']);
 		$ccNumber = mysqli_real_escape_string($conn, $_POST['card_number']);
-		$ccExpiration = mysqli_real_escape_string($conn, $_POST['expiration']);
+		$ccExpiration = mysqli_real_escape_string($conn, $_POST['expiration_date']);
 
+		if ($pin != $retypePin) {
+			die("Failed to verify PIN");
+		}
+
+		//update the customer first
+		$sql = "
+		UPDATE Customer
+		SET 
+		PIN = '$pin',
+		FName = '$firstName',
+		LName = '$lastName',
+		Address = '$address',
+		City = '$city',
+		State = '$state',
+		Zip = '$zip',
+		CardNo = '$ccNumber'
+		WHERE Username='$username'"; 
+		db_query($conn, $sql);
+
+		//then update the card
+		$sql = "
+		UPDATE CreditCard
+		SET
+		CardNo = '$ccNumber',
+		CardType = '$ccType',
+		ExpDate = '$ccExpiration'
+		WHERE CardNo = '$ccNumber'";
+		db_query($conn, $sql);
 	}
+
 
 	db_close($conn);
 
@@ -49,7 +77,7 @@
 	<title>UPDATE CUSTOMER PROFILE</title>
 </head>
 <body>
-	<form id="update_profile" action="" method="post">
+	<form id="update_profile" action="confirm_order.php" method="post">
 	<table align="center" style="border:2px solid blue;">
 		<tr>
 			<td align="right">
@@ -201,10 +229,10 @@
 				<input type="submit" id="update_submit" name="update_submit" value="Update">
 			</td>
 			</form>
-		<form id="cancel" action="confirm_order.php" method="post">	
-			<td align="left" colspan="2">
-				<input type="submit" id="cancel_submit" name="cancel_submit" value="Cancel">
-			</td>
+				<form id="cancel" action="confirm_order.php" method="post">	
+					<td align="left" colspan="2">
+						<input type="submit" id="cancel_submit" name="cancel_submit" value="Cancel">
+					</td>
 		</tr>
 	</table>
 	</form>

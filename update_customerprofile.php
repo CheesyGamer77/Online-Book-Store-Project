@@ -106,7 +106,7 @@
 				First Name<span style="color:red"></span>:
 			</td>
 			<td colspan="3">
-				<input type="text" id="firstname" name="firstname" value = <?php echo htmlspecialchars($customer["FName"])?>>
+				<input type="text" id="firstname" name="firstname" value = "<?php echo htmlspecialchars($customer["FName"])?>">
 			</td>
 		</tr>
 		<tr>
@@ -114,7 +114,7 @@
 				Last Name<span style="color:red"></span>:
 			</td>
 			<td colspan="3">
-				<input type="text" id="lastname" name="lastname" value = <?php echo htmlspecialchars($customer["LName"])?>>
+				<input type="text" id="lastname" name="lastname" value = "<?php echo htmlspecialchars($customer["LName"])?>">
 			</td>
 		</tr>
 		<tr>
@@ -130,7 +130,7 @@
 				City<span style="color:red"></span>:
 			</td>
 			<td colspan="3">
-				<input type="text" id="city" name="city" value = <?php echo htmlspecialchars($customer["City"])?>>
+				<input type="text" id="city" name="city" value = "<?php echo htmlspecialchars($customer["City"])?>">
 			</td>
 		</tr>
 		<tr>

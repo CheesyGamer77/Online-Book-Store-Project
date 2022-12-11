@@ -22,50 +22,6 @@
 	$customer = mysqli_fetch_assoc($res);
 	mysqli_free_result($res);
 
-	if (isset($_POST['update_submit'])) {
-		// use escape strings for inserting data
-		$oldccNumber = $customer["CardNo"];
-		$pin = mysqli_real_escape_string($conn, $_POST['new_pin']);
-		$retypePin = mysqli_real_escape_string($conn, $_POST['retypenew_pin']);
-		$firstName = mysqli_real_escape_string($conn, $_POST['firstname']);
-		$lastName = mysqli_real_escape_string($conn, $_POST['lastname']);
-		$address = mysqli_real_escape_string($conn, $_POST['address']);
-		$city = mysqli_real_escape_string($conn, $_POST['city']);
-		$state = mysqli_real_escape_string($conn, $_POST['state']);
-		$zip = mysqli_real_escape_string($conn, $_POST['zip']);
-		$ccType = mysqli_real_escape_string($conn, $_POST['credit_card']);
-		$ccNumber = mysqli_real_escape_string($conn, $_POST['card_number']);
-		$ccExpiration = mysqli_real_escape_string($conn, $_POST['expiration_date']);
-
-		if ($pin != $retypePin) {
-			die("Failed to verify PIN");
-		}
-
-		//update card 
-		$sql = "
-		UPDATE CreditCard
-		SET
-		CardNo = '$ccNumber',
-		CardType = '$ccType',
-		ExpDate = '$ccExpiration'
-		WHERE CardNo = '$oldccNumber'";
-		db_query($conn, $sql);
-
-		//update customer
-		$sql = "
-		UPDATE Customer
-		SET 
-		PIN = '$pin',
-		FName = '$firstName',
-		LName = '$lastName',
-		Address = '$address',
-		City = '$city',
-		State = '$state',
-		Zip = '$zip'
-		WHERE Username='$username'"; 
-		db_query($conn, $sql);
-	}
-
 	if(isset($_POST["btnbuyit"]))
 	{
 		if($_POST["cardgroup"] == "new_card")

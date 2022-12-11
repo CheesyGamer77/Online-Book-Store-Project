@@ -1,4 +1,5 @@
 <?php
+	require_once 'lib/common.php';
 	session_start();
 
 	if(!isset($_POST["btnbuyit"]) || !isset($_SESSION["username"]) || !isset($_SESSION["cart"])) {
@@ -18,7 +19,6 @@
 
 		exit;
 	}
-	require_once 'lib/common.php';
 
 	$conn = db_connect();
 
@@ -57,6 +57,23 @@
 	$city = $data["City"];
 	$state = $data["State"];
 	$zip = $data["Zip"];
+
+		//if the user changed their card on the last page, update it here.
+	if($_POST["cardgroup"] == "new_card")
+		{
+			$oldccNum = $cardNumber;
+			$cardType = $_POST["credit_card"];
+			$cardNumber = $_POST["card_number"];
+			$cardDate = $_POST["card_expiration"];
+			$sql = 
+			"UPDATE Creditcard
+			 SET CardNo = '$cardNumber',
+			 CardType = '$cardType',
+			 ExpDate = '$cardDate'
+			 WHERE CardNo = '$oldccNum'";
+			db_query($conn, $sql);
+		}
+
 	mysqli_free_result($res);
 	
 	// now insert the rest of the books into the purchase

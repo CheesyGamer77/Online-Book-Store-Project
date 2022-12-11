@@ -14,7 +14,7 @@
 
 	$sql = "SELECT * FROM Customer
 		NATURAL JOIN (
-			SELECT CardNo, CardType, MONTH(ExpDate) AS ExpMonth, YEAR(ExpDate) as ExpYear
+			SELECT CardNo, CardType, ExpDate
 			FROM CreditCard
 		)CardData
 		WHERE Username='$username'";
@@ -23,13 +23,32 @@
 	$customer = mysqli_fetch_assoc($res);
 	mysqli_free_result($res);
 
-	db_close($conn);
+	if(isset($_POST["btnbuyit"]))
+	{
+		if($_POST["cardgroup"] == "new_card")
+		{
+			$oldccNum = $customer["CardNo"];
+			$newccType = $_POST["credit_card"];
+			$newccNum = $_POST["card_number"];
+			$newccDate = $_POST["card_expiration"];
+			$sql = 
+			"UPDATE Creditcard
+			 SET CardNo = '$newccNum',
+			 CardType = '$newccType',
+			 ExpDate = '$newccDate'
+			 WHERE CardNo = '$oldccNum'";
+			 db_query($conn, $sql);
+		}
+		db_close($conn);
+	}
+
 
 	// compute subtotal
 	$subtotal = 0;
 	foreach ($_SESSION["cart"] as $book) {
 		$subtotal += $book["price"] * $book["quantity"];
 	}
+	
 ?>
 
 <!DOCTYPE HTML>
@@ -51,10 +70,10 @@
 		<!-- For some odd reason this is placed right after the start of the shipping address display :shrug: -->
 		<td rowspan="3" colspan="2">
 			<!-- You can choose to use the credit card already stored -->
-			<input type="radio" name="cardgroup" value="profile_card" checked>Use Credit card on file<br /><?php echo $customer["CardType"] . " - " . $customer["CardNo"] . " - " . $customer["ExpMonth"] . "/" . $customer["ExpYear"] ?><br />
+			<input type="radio" name="cardgroup" value="profile_card" checked>Use Credit card on file<br /><?php echo $customer["CardType"] . " - " . $customer["CardNo"] . " - " . $customer["ExpDate"] ?><br />
 			
 			<!-- Or use a new one instead -->
-			<input type="radio" name="cardgroup" value="new_card">New Credit Card<br />
+			<input type="radio" name="cardgroup" value="new_card" id="newcard">New Credit Card<br />
 			<select id="credit_card" name="credit_card">
 				<option selected disabled>select a card type</option>
 				<option>VISA</option>
@@ -64,7 +83,7 @@
 			<input type="text" id="card_number" name="card_number" placeholder="Credit card number">
 			<br />
 			Exp date
-			<input type="text" id="card_expiration" name="card_expiration" placeholder="mm/yyyy">
+			<input type="text" id="card_expiration" name="card_expiration" placeholder="YYYY-MM-DD">
 		</td>
 		
 		<!-- Here's the rest of the address stuff -->

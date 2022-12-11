@@ -18,6 +18,14 @@
 		$ccNumber = mysqli_real_escape_string($conn, $_POST['card_number']);
 		$ccExpiration = mysqli_real_escape_string($conn, $_POST['expiration']);
 
+		//cancel the insertion if any inputs are missing
+		if(!$username||!$pin||!$retypePin||!$firstName||!$lastName||!$address||!$city||!$state||!$zip||!$ccType||!$ccNumber||!$ccExpiration)
+		{
+			header("Location: customer_registration.php");
+			exit;
+		}
+
+
 		if ($pin != $retypePin) {
 			die("Failed to verify PIN");
 		}
@@ -31,9 +39,11 @@
 		// insert the rest of the user data
 		// FIXME: Violates GDPR regulations on encrypting PII
 		$sql = "INSERT INTO Customer(Username, PIN, FName, LName, Address, City, State, Zip, CardNo) VALUES ('$username', '$pin', '$firstName', '$lastName', '$address', '$city', '$state', '$zip', '$ccNumber');";
-		db_query($conn, $sql);
-		debug("Inserted Customer");
 
+		if(db_query($conn, $sql)) {
+			header("Location: index.php");
+			exit;
+		}
 		db_close($conn);
 	}
 ?>
@@ -108,9 +118,57 @@
 			<td align="left">
 				<select id="state" name="state">
 				<option selected disabled>select a state</option>
-				<option>Michigan</option>
-				<option>California</option>
-				<option>Tennessee</option>
+					<option value="AL">Alabama</option>
+					<option value="AK">Alaska</option>
+					<option value="AZ">Arizona</option>
+					<option value="AR">Arkansas</option>
+					<option value="CA">California</option>
+					<option value="CO">Colorado</option>
+					<option value="CT">Connecticut</option>
+					<option value="DE">Delaware</option>
+					<option value="DC">District Of Columbia</option>
+					<option value="FL">Florida</option>
+					<option value="GA">Georgia</option>
+					<option value="HI">Hawaii</option>
+					<option value="ID">Idaho</option>
+					<option value="IL">Illinois</option>
+					<option value="IN">Indiana</option>
+					<option value="IA">Iowa</option>
+					<option value="KS">Kansas</option>
+					<option value="KY">Kentucky</option>
+					<option value="LA">Louisiana</option>
+					<option value="ME">Maine</option>
+					<option value="MD">Maryland</option>
+					<option value="MA">Massachusetts</option>
+					<option value="MI">Michigan</option>
+					<option value="MN">Minnesota</option>
+					<option value="MS">Mississippi</option>
+					<option value="MO">Missouri</option>
+					<option value="MT">Montana</option>
+					<option value="NE">Nebraska</option>
+					<option value="NV">Nevada</option>
+					<option value="NH">New Hampshire</option>
+					<option value="NJ">New Jersey</option>
+					<option value="NM">New Mexico</option>
+					<option value="NY">New York</option>
+					<option value="NC">North Carolina</option>
+					<option value="ND">North Dakota</option>
+					<option value="OH">Ohio</option>
+					<option value="OK">Oklahoma</option>
+					<option value="OR">Oregon</option>
+					<option value="PA">Pennsylvania</option>
+					<option value="RI">Rhode Island</option>
+					<option value="SC">South Carolina</option>
+					<option value="SD">South Dakota</option>
+					<option value="TN">Tennessee</option>
+					<option value="TX">Texas</option>
+					<option value="UT">Utah</option>
+					<option value="VT">Vermont</option>
+					<option value="VA">Virginia</option>
+					<option value="WA">Washington</option>
+					<option value="WV">West Virginia</option>
+					<option value="WI">Wisconsin</option>
+					<option value="WY">Wyoming</option>
 				</select>
 			</td>
 			<td align="right">
@@ -141,7 +199,7 @@
 				Expiration Date<span style="color:red">*</span>:
 			</td>
 			<td colspan="2" align="left">
-				<input type="text" id="expiration" name="expiration" placeholder="MM/YY">
+				<input type="text" id="expiration" name="expiration" placeholder="YYYY-MM-DD">
 			</td>
 		</tr>
 		<tr>

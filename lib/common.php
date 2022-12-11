@@ -4,7 +4,7 @@
      * @return conn MySQL Connection object.
      */
     function db_connect() {
-        $conn = @mysqli_connect('localhost', 'root', 'Karakeightpeaks88@', 'bookstore') or alert("Failed to connect to database: " . mysqli_connect_error());
+        $conn = @mysqli_connect('localhost', 'frontend', '8sDAe2+2$pX2-+s', 'BBB') or alert("Failed to connect to database: " . mysqli_connect_error());
         return $conn;
     }
 
